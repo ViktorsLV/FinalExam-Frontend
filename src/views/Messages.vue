@@ -3,12 +3,16 @@
     <TheLoader v-if="loading" />
     <section v-else>
       <img src="../../public/img/logo.png" alt="e-pant" width="30%" />
-      <v-row class="background-image">
-        <v-col cols="12" class="mt-6">
-          <h1>Home</h1>
+      <v-row class="">
+        <v-col cols="12" class="mt-6 d-flex">
+          <h1>Messages</h1>
         </v-col>
         <v-col cols="12" class="pt-0">
-          <Post class="mb-4" v-for="post in allPosts" :key="post.id" v-bind:post="post" :showDetails="false"/>
+          <Conversation v-if="conversation"/>
+          <div v-else align="center" class="mt-10">
+            <img src="../../public/img/step-2.png" alt="svg" width="70%" />
+            <h1>You don't have any messages</h1>
+          </div>
         </v-col>
       </v-row>
     </section>
@@ -17,26 +21,22 @@
 
 <script>
 import TheLoader from "@/components/app/TheLoader.vue";
-import Post from "@/components/Post.vue";
+import Conversation from "@/components/Messages/Conversation.vue";
+
 export default {
-  name: "Home",
+  name: "Messages",
   components: {
     TheLoader,
-    Post,
+    Conversation,
   },
   data() {
     return {
       loading: true,
+      conversation: true // to DELETE
     };
   },
-  async mounted() {
-    await this.$store.dispatch("getPosts");
+  mounted() {
     this.loading = false;
-  },
-  computed: {
-    allPosts() {
-      return this.$store.getters.allPosts;
-    },
   },
 };
 </script>
