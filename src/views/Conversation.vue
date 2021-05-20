@@ -5,14 +5,14 @@
       <img src="../../public/img/logo.png" alt="e-pant" width="30%" />
       <v-row class="">
         <v-col cols="12" class="mt-6 d-flex">
-          <h1>Messages</h1>
+          <h1>You are talking to</h1>
+          <v-spacer></v-spacer>
+          <v-icon large @click="$router.go(-1)" class="secondary--text"
+            >mdi-less-than</v-icon
+          >
         </v-col>
         <v-col cols="12" class="pt-0">
-          <ConversationList v-if="conversation"/>
-          <div v-else align="center" class="mt-10">
-            <img src="../../public/img/step-2.png" alt="svg" width="70%" />
-            <h1>You don't have any messages</h1>
-          </div>
+            <ConversationCard />
         </v-col>
       </v-row>
     </section>
@@ -21,13 +21,13 @@
 
 <script>
 import TheLoader from "@/components/app/TheLoader.vue";
-import ConversationList from "@/components/Messages/ConversationList.vue";
+import ConversationCard from "@/components/Messages/ConversationCard.vue";
 
 export default {
   name: "Messages",
   components: {
     TheLoader,
-    ConversationList,
+    ConversationCard,
   },
   data() {
     return {

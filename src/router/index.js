@@ -97,12 +97,31 @@ const router = new VueRouter({
     },
     {
       path: '/tasks',
-      name: 'Tasks',
       component: () => import('../views/Tasks.vue'),
       meta: {
         layout: 'main',
         auth: true
-      }
+      },
+      props: true,
+      children: [{
+          path: "/",
+          name: "MyPosts",
+          meta: {
+            layout: 'main',
+            auth: true
+          },
+          component: () => import('@/components/Tasks/MyPosts.vue'),
+        },
+        {
+          path: "/tasks/my-deliveries",
+          name: "Treat Categories",
+          meta: {
+            layout: 'main',
+            auth: true
+          },
+          component: () => import('@/components/Tasks/MyDeliveries.vue'),
+        },
+      ]
     },
     {
       path: '/add-post',
@@ -117,6 +136,15 @@ const router = new VueRouter({
       path: '/messages',
       name: 'Messages',
       component: () => import('../views/Messages.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      }
+    },
+    {
+      path: '/conversation',
+      name: 'Conversation',
+      component: () => import('../views/Conversation.vue'),
       meta: {
         layout: 'main',
         auth: true
