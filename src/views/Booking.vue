@@ -5,26 +5,21 @@
       <img src="../../public/img/logo.png" alt="e-pant" width="30%" />
       <v-row class="background-image">
         <v-col cols="12" class="mt-6 d-flex">
-          <h1>Post</h1>
+          <h1>Book Pick-up</h1>
           <v-spacer></v-spacer>
           <v-icon large @click="$router.go(-1)" class="secondary--text"
             >mdi-less-than</v-icon
           >
         </v-col>
-        <v-col cols="12" class="pt-0">
-          <Post
-            class="mb-4"
-            :showArrow="false"
-            :showProfile="false"
-            v-bind:post="singlePost"
-          />
+        <v-col cols="12" class="pt-0 mt-5">
+          <DetailsCard :post="singlePost" />
         </v-col>
-        <v-col cols="12" class="mt-2">
-          <h1>User</h1>
-          <UserCardSmall :user="user" />
-          <router-link :to="{ name: 'Booking', params: { id: singlePost.id } }">
-            <TheButton v-if="currentUser.id != user.id" :text="'start booking'"/>
-          </router-link>
+        <v-col cols="12" class="pt-0 mt-5">
+          <PointsCard />
+        </v-col>
+        <v-col cols="12" class="pt-0 mt-5 mb-15">
+          <MessageCard />
+          <TheButton :text="'complete'" class="mb-10"/>
         </v-col>
       </v-row>
     </section>
@@ -33,16 +28,18 @@
 
 <script>
 import TheLoader from "@/components/app/TheLoader.vue";
-import Post from "@/components/Post.vue";
-import UserCardSmall from "@/components/User/UserCardSmall.vue";
+import DetailsCard from "@/components/Booking/DetailsCard.vue";
+import PointsCard from "@/components/Booking/PointsCard.vue";
+import MessageCard from "@/components/Booking/MessageCard.vue";
 import TheButton from "@/components/app/TheButton.vue";
 
 export default {
   name: "PostDetails",
   components: {
     TheLoader,
-    Post,
-    UserCardSmall,
+    DetailsCard,
+    PointsCard,
+    MessageCard,
     TheButton
   },
   data() {
@@ -58,12 +55,9 @@ export default {
     singlePost() {
       return this.$store.getters.singlePost;
     },
-    user() {
-      return this.$store.getters.singlePost.author;
-    },
-    currentUser() {
-      return this.$store.state.CurrentUser.currentUser;
-    },
+    // user() {
+    //   return this.$store.getters.singlePost.author;
+    // },
   },
   mounted() {
     this.loading = false;

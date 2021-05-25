@@ -1,7 +1,7 @@
 <template>
   <div>
-      My Deliveries
-      <h1>Lorem ipsum dolor sit.</h1>
+      <h1>My Deliveries</h1>
+      <p>You do not have any active deliveries</p>
   </div>
 </template>
 

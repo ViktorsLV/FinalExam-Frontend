@@ -7,10 +7,17 @@
           <img src="../../public/img/logo.png" alt="e-pant" width="60%" />
         </v-col>
         <v-col cols="12" class="mx-auto card-margin" align="center">
-          <h1 class="primary--text">Log-in with your Graitor account</h1> 
+          <h1 class="primary--text">Log-in with your Graitor account</h1>
         </v-col>
         <v-row justify="center">
           <v-col cols="10" class="pb-0">
+            <div align="center" class="mb-1">
+              <small
+                v-if="invalid"
+                class="red--text"
+                >Username/E-mail and/or Password is wrong</small
+              >
+            </div>
             <form v-on:keyup.enter="login">
               <div>
                 <v-text-field
@@ -44,7 +51,13 @@
                 </p>
               </div>
               <div>
-                <v-btn class="primary" rounded large width="100%" @click="login"
+                <v-btn
+                  class="primary"
+                  rounded
+                  large
+                  width="100%"
+                  @click="login"
+                  :disabled="!identifier.length || !password.length"
                   >LOG-IN</v-btn
                 >
               </div>
@@ -76,6 +89,7 @@ export default {
       identifier: "",
       password: "",
       showPassword: false,
+      invalid: false,
     };
   },
   methods: {
@@ -84,7 +98,7 @@ export default {
       const user = {
         identifier: this.identifier,
         password: this.password,
-      }
+      };
       try {
         await this.$store.dispatch("login", user);
         this.$router.push("/step-one");
@@ -92,6 +106,10 @@ export default {
         this.identifier = this.password = "";
       } catch (error) {
         console.log(error);
+        this.invalid = true;
+        setTimeout(() => {
+          this.invalid = false;
+        }, 5000);
         this.progress = false;
       }
     },
@@ -102,5 +120,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="css">
 </style>

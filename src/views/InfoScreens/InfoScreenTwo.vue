@@ -8,7 +8,12 @@
       <v-col cols="10" align="center" class="mx-auto">
         <h3 class="mt-3">You will easily see where there are some who would like to get rid of their mortgage.</h3>
       </v-col>
-      <v-col cols="10" align="center" class="mx-auto"> steps </v-col>
+      <v-col cols="10" align="center" class="mx-auto"> 
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+      <v-icon class="primary--text">mdi-checkbox-blank-circle</v-icon>
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+       </v-col>
       <v-col cols="10" align="center" class="mx-auto">
         <router-link to="/step-three">
           <v-btn outlined rounded color="primary" width="100%">NEXT</v-btn>

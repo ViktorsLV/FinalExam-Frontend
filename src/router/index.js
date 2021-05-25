@@ -87,13 +87,23 @@ const router = new VueRouter({
     },
     {
       path: '/post/:id',
-      name: 'PostDetails',
+      name: 'Post Details',
       component: () => import('../views/PostDetails.vue'),
       props: true,
       meta: {
         layout: 'main',
         auth: true
-      }
+      },
+    },
+    {
+      path: '/post/:id/booking',
+      name: 'Booking',
+      component: () => import('../views/Booking.vue'),
+      props: true,
+      meta: {
+        layout: 'main',
+        auth: true
+      },
     },
     {
       path: '/tasks',
@@ -105,7 +115,7 @@ const router = new VueRouter({
       props: true,
       children: [{
           path: "/",
-          name: "MyPosts",
+          name: "My Posts",
           meta: {
             layout: 'main',
             auth: true
@@ -157,7 +167,44 @@ const router = new VueRouter({
       meta: {
         layout: 'main',
         auth: true
-      }
+      },
+    },
+    {
+      path: "/account/profile/:id",
+      name: "My Profile",
+      props: true,
+      component: () => import('../views/Account/Profile.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
+    {
+      path: "/account/points-overview",
+      name: "Points Overview",
+      component: () => import('../views/Account/PointsOverview.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
+    {
+      path: "/account/invite-friends",
+      name: "Invite Friends",
+      component: () => import('../views/Account/InviteFriends.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
+    {
+      path: "/account/verifications",
+      name: "Verify Account",
+      component: () => import('../views/Account/Verifications.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      },
     },
   ]
 })

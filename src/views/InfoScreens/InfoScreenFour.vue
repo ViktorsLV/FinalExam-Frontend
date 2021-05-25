@@ -9,7 +9,12 @@
         <h3 class="mt-3">When you pledge, you get both money and Points!</h3>
         
       </v-col>
-      <v-col cols="10" align="center" class="mx-auto"> steps </v-col>
+      <v-col cols="10" align="center" class="mx-auto"> 
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+      <v-icon class="primary--text">mdi-checkbox-blank-circle</v-icon>
+       </v-col>
       <v-col cols="10" align="center" class="mx-auto">
         <router-link to="/home">
           <v-btn outlined rounded color="primary" width="100%">FINISH</v-btn>

@@ -9,7 +9,12 @@
         <h3 class="mt-3">Help others get their mortgage picked up.</h3>
         <h3 class="mt-3">Help others give them your mortgage.</h3>
       </v-col>
-      <v-col cols="10" align="center" class="mx-auto"> steps </v-col>
+      <v-col cols="10" align="center" class="mx-auto">
+        <v-icon class="primary--text">mdi-checkbox-blank-circle</v-icon>
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+        <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
+      </v-col>
       <v-col cols="10" align="center" class="mx-auto">
         <router-link to="/step-two">
           <v-btn outlined rounded color="primary" width="100%">NEXT</v-btn>

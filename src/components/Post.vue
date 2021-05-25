@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link :to="{ name: 'PostDetails', params: { id: post.id } }">
+    <router-link :to="{ name: 'Post Details', params: { id: post.id } }">
       <v-card class="mx-auto" outlined rounded="xl" elevation="5">
         <v-card-actions v-if="showProfile">
           <v-list-item class="grow">
@@ -14,8 +14,8 @@
 
             <v-list-item-content>
               <v-list-item-title
-                >{{ post.users_permissions_user.firstName }}
-                {{ post.users_permissions_user.lastName }}</v-list-item-title
+                >{{ post.author.firstName }}
+                {{ post.author.lastName }}</v-list-item-title
               >
               <v-rating
                 v-model="rating"
@@ -31,7 +31,7 @@
             <v-row align="center" justify="end">
               <span class="caption"
                 >Posted on
-                {{ moment(post.published_at).format("MMM Do YY") }}</span
+                {{ moment(post.published_at).format("MMM Do, YYYY") }}</span
               >
             </v-row>
           </v-list-item>
@@ -41,16 +41,18 @@
           <v-list-item-content class="ml-2">
             <v-list-item-subtitle
               ><v-icon class="secondary--text">mdi-google-maps</v-icon>
-              {{ post.address }}</v-list-item-subtitle
+              {{ post.city }}, {{ post.street }} {{ post.houseNumber }},
+              {{ post.zip }}</v-list-item-subtitle
             >
             <v-list-item-subtitle>
               <span>
                 <v-icon class="secondary--text">mdi-calendar</v-icon>
-                {{ moment(post.date).subtract(10, "days").calendar() }}
+                {{ moment(post.date).format("MMM Do, YYYY") }}
               </span>
-              <span class="ml-6">
-                <v-icon class="secondary--text">mdi-clock</v-icon> 14:20
-              </span>
+              <!-- <span class="ml-6">
+                <v-icon class="secondary--text">mdi-clock</v-icon>
+                {{ moment(post.time).calendar() }}
+              </span> -->
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -60,7 +62,7 @@
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon large class="secondary--text">mdi-trash-can</v-icon>x{{
-                  post.bags
+                  post.bagNumber
                 }}
               </v-list-item-title>
             </v-list-item-content>
@@ -74,11 +76,11 @@
         <v-list-item class="grow" v-if="showDetails">
           <v-list-item-content class="ml-2">
             <v-list-item-title>Type of bag</v-list-item-title>
-            <v-list-item-subtitle>Dansk Retur System</v-list-item-subtitle>
+            <v-list-item-subtitle>{{post.bagType}}</v-list-item-subtitle>
 
             <v-list-item-title class="mt-3">Preferences</v-list-item-title>
             <v-list-item-subtitle
-              >To be picked up at the door</v-list-item-subtitle
+              >{{post.comments}}</v-list-item-subtitle
             >
           </v-list-item-content>
         </v-list-item>
