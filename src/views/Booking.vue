@@ -19,7 +19,7 @@
         </v-col>
         <v-col cols="12" class="pt-0 mt-5 mb-15">
           <MessageCard />
-          <TheButton :text="'complete'" class="mb-10"/>
+          <TheButton :text="'complete'" class="mb-10" @click="bookPost" />
         </v-col>
       </v-row>
     </section>
@@ -40,16 +40,17 @@ export default {
     DetailsCard,
     PointsCard,
     MessageCard,
-    TheButton
+    TheButton,
   },
   data() {
     return {
       loading: true,
+      postId: "",
     };
   },
   async created() {
-    const id = this.$route.params.id;
-    await this.$store.dispatch("getSinglePost", id);
+    this.postId = this.$route.params.id;
+    await this.$store.dispatch("getSinglePost", this.postId);
   },
   computed: {
     singlePost() {
@@ -61,6 +62,23 @@ export default {
   },
   mounted() {
     this.loading = false;
+  },
+  methods: {
+    async bookPost() {
+      try {
+        await this.$store.dispatch("bookPost", {
+          postId: this.postId,
+          booked: true,
+        });
+        await this.$store.dispatch("changePostState", {
+          postId: this.postId,
+          booked: true,
+        });
+        this.$router.push('/tasks/my-deliveries')
+      } catch (error) {
+        console.log(error)
+      }
+    },
   },
 };
 </script>

@@ -134,6 +134,26 @@ const router = new VueRouter({
       ]
     },
     {
+      path: '/tasks/:id/complete-delivery',
+      name: 'Complete Delivery',
+      component: () => import('../views/CompleteDelivery.vue'),
+      props: true,
+      meta: {
+        layout: 'main',
+        auth: true
+      }
+    },
+    {
+      path: '/tasks/:id/receipt',
+      name: 'Receipt',
+      component: () => import('../views/Receipt.vue'),
+      props: true,
+      meta: {
+        layout: 'main',
+        auth: true
+      }
+    },
+    {
       path: '/add-post',
       name: 'Add Post',
       component: () => import('../views/AddPost.vue'),

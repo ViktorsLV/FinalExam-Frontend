@@ -36,7 +36,7 @@ const actions = {
 
         try {
             sessionStorage.setItem("token", response.data.jwt);
-            await this.dispatch("fetchUser");
+            await this.dispatch("fetchCurrentUser");
         } catch (error) {
             console.log('Error:', error);
         }

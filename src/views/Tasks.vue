@@ -13,7 +13,7 @@
             slider-size="5"
             class="mb-10"
           >
-            <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.route" exact>
+            <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.route" exact class="text-weight-bold">
               {{ tab.name }}
             </v-tab>
           </v-tabs>

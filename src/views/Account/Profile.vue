@@ -42,10 +42,23 @@
               ></v-rating>
               <v-list-item-subtitle
                 >Member since
-                {{ moment(user.created_at).format('l') }}
+                {{ moment(user.created_at).format("l") }}
               </v-list-item-subtitle>
             </v-list-item-content>
           </div>
+        </v-col>
+        <v-col cols="12" class="py-0">
+          <div align="right">
+            <v-btn class="primary" small rounded>
+              <h4>Edit</h4>
+            </v-btn>
+          </div>
+        </v-col>
+        <v-col cols="12" class="mt-5">
+          <StatisticCard />
+        </v-col>
+        <v-col cols="12" class="pt-0 mb-10">
+          <ProfileInfoCard class="mb-10" />
         </v-col>
       </v-row>
     </section>
@@ -54,12 +67,16 @@
 
 <script>
 import TheLoader from "@/components/app/TheLoader.vue";
+import ProfileInfoCard from "@/components/Account/ProfileInfoCard.vue";
+import StatisticCard from "@/components/Account/StatisticCard.vue";
 import moment from "moment";
 
 export default {
   name: "Profile",
   components: {
     TheLoader,
+    ProfileInfoCard,
+    StatisticCard,
   },
   data() {
     return {

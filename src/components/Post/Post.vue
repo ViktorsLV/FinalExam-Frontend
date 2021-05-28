@@ -1,7 +1,13 @@
 <template>
   <div>
     <router-link :to="{ name: 'Post Details', params: { id: post.id } }">
-      <v-card class="mx-auto" outlined rounded="xl" elevation="5">
+      <v-card
+        class="mx-auto"
+        outlined
+        rounded="xl"
+        elevation="5"
+        :class="{ lightGreen: isBooked }"
+      >
         <v-card-actions v-if="showProfile">
           <v-list-item class="grow">
             <v-list-item-avatar color="grey darken-3">
@@ -61,9 +67,19 @@
           <v-list-item class="grow">
             <v-list-item-content>
               <v-list-item-title>
-                <v-icon large class="secondary--text">mdi-trash-can</v-icon>x{{
-                  post.bagNumber
-                }}
+                <div v-if="post.bagNumber > 4">
+                  <v-icon large class="secondary--text">mdi-trash-can</v-icon
+                  >x{{ post.bagNumber }}
+                </div>
+                <v-icon
+                  v-else
+                  large
+                  class="secondary--text"
+                  v-for="(n, index) in post.bagNumber"
+                  :key="n.id"
+                  :index="index"
+                  >mdi-trash-can</v-icon
+                >
               </v-list-item-title>
             </v-list-item-content>
 
@@ -76,14 +92,18 @@
         <v-list-item class="grow" v-if="showDetails">
           <v-list-item-content class="ml-2">
             <v-list-item-title>Type of bag</v-list-item-title>
-            <v-list-item-subtitle>{{post.bagType}}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ post.bagType }}</v-list-item-subtitle>
 
             <v-list-item-title class="mt-3">Preferences</v-list-item-title>
-            <v-list-item-subtitle
-              >{{post.comments}}</v-list-item-subtitle
-            >
+            <v-list-item-subtitle>{{ post.comments }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
+
+        <!-- <v-row justify="center">
+          <v-col cols="10">
+
+          </v-col>
+        </v-row> -->
       </v-card>
     </router-link>
   </div>
@@ -111,9 +131,17 @@ export default {
       type: Boolean,
       default: true,
     },
+    showButton: {
+      type: Boolean,
+      default: false,
+    },
     showProfile: {
       type: Boolean,
       default: true,
+    },
+    isBooked: {
+      type: Boolean,
+      default: false,
     },
   },
 };

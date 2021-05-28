@@ -17,7 +17,7 @@
 
 <script>
 import TheLoader from "@/components/app/TheLoader.vue";
-import Post from "@/components/Post.vue";
+import Post from "@/components/Post/Post.vue";
 export default {
   name: "Home",
   components: {

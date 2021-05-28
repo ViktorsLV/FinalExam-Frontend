@@ -10,6 +10,7 @@ export default new Vuetify({
       light: {
         primary: '#00aa89',
         secondary: '#00756d',
+        lightGreen: '#E0F2F1',
         accent: colors.indigo.base,
         headlineLight: colors.grey.darken2,
         disabled: '#E0E0E0'

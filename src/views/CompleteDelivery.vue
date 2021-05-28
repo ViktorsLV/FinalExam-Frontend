@@ -12,38 +12,33 @@
           >
         </v-col>
         <v-col cols="12" class="pt-0">
-          <Post
+          <BookedPost
             class="mb-4"
-            :showArrow="false"
-            :showProfile="false"
             :post="singlePost"
           />
         </v-col>
-        <v-col cols="12" class="mt-2">
-          <h1>User</h1>
-          <UserCardSmall :user="user" />
-          <router-link :to="{ name: 'Booking', params: { id: singlePost.id } }">
-            <TheButton v-if="currentUser.id != user.id" :text="'start booking'"/>
-          </router-link>
+        <v-col cols="12">
+        <TheButton :text="'scan receipt'" class="mb-3" @click="openCameraSheet()"/>
         </v-col>
       </v-row>
+      <CameraSheet ref="cameraSheet" :post="singlePost"/>
     </section>
   </div>
 </template>
 
 <script>
 import TheLoader from "@/components/app/TheLoader.vue";
-import Post from "@/components/Post/Post.vue";
-import UserCardSmall from "@/components/User/UserCardSmall.vue";
 import TheButton from "@/components/app/TheButton.vue";
+import BookedPost from "@/components/Post/BookedPost.vue";
+import CameraSheet from '@/components/Booking/CameraSheet.vue';
 
 export default {
   name: "PostDetails",
   components: {
     TheLoader,
-    Post,
-    UserCardSmall,
-    TheButton
+    TheButton,
+    BookedPost,
+    CameraSheet
   },
   data() {
     return {
@@ -58,15 +53,14 @@ export default {
     singlePost() {
       return this.$store.getters.singlePost;
     },
-    user() {
-      return this.$store.getters.singlePost.author;
-    },
-    currentUser() {
-      return this.$store.state.CurrentUser.currentUser;
-    },
   },
   mounted() {
     this.loading = false;
+  },
+  methods: {
+    openCameraSheet() {
+      this.$refs.cameraSheet.changeState(true);
+    },
   },
 };
 </script>

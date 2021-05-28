@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>My Posts</h1>
-    <p>You do not have any active posts</p>
+    <p v-if="!usersPosts">You do not have any active posts</p>
     <Post
       class="mb-4"
       v-for="post in usersPosts"
@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import Post from "@/components/Post.vue";
+import Post from "@/components/Post/Post.vue";
+
 export default {
   components: {
     Post,
