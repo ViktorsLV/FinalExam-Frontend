@@ -1,10 +1,12 @@
 <template>
   <v-btn
     @click="$emit('click')"
-    class="primary white--text font-weight-bold mt-2"
+    class="white--text font-weight-bold mt-2"
     width="100%"
+    color="primary"
     rounded
     large
+    :disabled="disabled"
     >{{ text }}</v-btn
   >
 </template>
@@ -16,6 +18,10 @@ export default {
       type: String,
       default: "BUTTON",
       required: true,
+    },
+    disabled: {
+      type: Boolean, 
+      default: false
     },
   },
 };

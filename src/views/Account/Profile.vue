@@ -50,18 +50,16 @@
             </v-list-item-content>
           </div>
         </v-col>
-        <v-col cols="12" class="py-0">
-          <div align="right">
-            <v-btn class="primary" small rounded>
-              <h4>Edit</h4>
-            </v-btn>
-          </div>
-        </v-col>
         <v-col cols="12" class="mt-5">
-          <StatisticCard />
+          <StatisticCard :user="user"/>
         </v-col>
-        <v-col cols="12" class="pt-0 mb-10">
-          <ProfileInfoCard class="mb-10" />
+        <v-col cols="12" class="pt-0">
+          <ProfileInfoCard :user="user"/>
+        </v-col>
+        <v-col cols="12" class="py-0 mb-15">
+          <router-link :to="{ name: 'Edit Profile', params: { id: user.id } }">
+          <TheButton :text="'edit profile'" class="mb-10"/>
+          </router-link>
         </v-col>
       </v-row>
     </section>
@@ -72,6 +70,7 @@
 import TheLoader from "@/components/app/TheLoader.vue";
 import ProfileInfoCard from "@/components/Account/ProfileInfoCard.vue";
 import StatisticCard from "@/components/Account/StatisticCard.vue";
+import TheButton from "@/components/app/TheButton.vue";
 import moment from "moment";
 
 export default {
@@ -80,13 +79,14 @@ export default {
     TheLoader,
     ProfileInfoCard,
     StatisticCard,
+    TheButton
   },
   data() {
     return {
       loading: true,
       rating: 4.3,
       moment: moment,
-      api_url: 'http://localhost:1337'
+      api_url: process.env.VUE_APP_ENDPOINT
     };
   },
   async created() {

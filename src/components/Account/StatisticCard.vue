@@ -14,7 +14,7 @@
             </v-list-item-content>
             <v-spacer></v-spacer>
             <v-list-item-content align="right">
-              <v-list-item-title>11</v-list-item-title>
+              <v-list-item-title>{{user.posts.length}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
@@ -41,6 +41,12 @@
 
 <script>
 export default {  
+  props: {
+    user: {
+      type: Object,
+      required: true
+    },
+  },
   data() {
     return {
     };

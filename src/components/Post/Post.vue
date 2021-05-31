@@ -24,7 +24,7 @@
 
             <v-list-item-content>
               <v-list-item-title
-                >{{ post.author.firstName }}
+                >{{ post.author.firstName }} 
                 {{ post.author.lastName }}</v-list-item-title
               >
               <v-rating
@@ -99,15 +99,10 @@
             <v-list-item-subtitle>{{ post.bagType }}</v-list-item-subtitle>
 
             <v-list-item-title class="mt-3">Preferences</v-list-item-title>
-            <v-list-item-subtitle>{{ post.comments }}</v-list-item-subtitle>
+            <v-list-item-subtitle v-if="post.comments">{{ post.comments }}</v-list-item-subtitle>
+            <v-list-item-subtitle v-else>-</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-
-        <!-- <v-row justify="center">
-          <v-col cols="10">
-
-          </v-col>
-        </v-row> -->
       </v-card>
     </router-link>
   </div>
@@ -120,7 +115,7 @@ export default {
     return {
       rating: 4.3,
       moment: moment,
-      api_url: "http://localhost:1337",
+      api_url: process.env.VUE_APP_ENDPOINT
     };
   },
   props: {

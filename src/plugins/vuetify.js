@@ -13,7 +13,8 @@ export default new Vuetify({
         lightGreen: '#E0F2F1',
         accent: colors.indigo.base,
         headlineLight: colors.grey.darken2,
-        disabled: '#E0E0E0'
+        disabled: '#E0E0E0',
+        delete: '#FF5252'
       },
     },
   },

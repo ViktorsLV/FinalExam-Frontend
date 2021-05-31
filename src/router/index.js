@@ -210,6 +210,16 @@ const router = new VueRouter({
       },
     },
     {
+      path: "/account/profile/:id/edit",
+      name: "Edit Profile",
+      props: true,
+      component: () => import('../views/Account/EditProfile.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
+    {
       path: "/account/points-overview",
       name: "Points Overview",
       component: () => import('../views/Account/PointsOverview.vue'),

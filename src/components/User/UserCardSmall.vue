@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       rating: 2.7,
-      api_url: "http://localhost:1337",
+      api_url: process.env.VUE_APP_ENDPOINT
     };
   },
   props: ["user"],

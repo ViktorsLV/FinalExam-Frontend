@@ -8,15 +8,13 @@
           <v-list-item >
             <v-list-item-content>
               <v-list-item-title>
-                <v-icon class="secondary--text"
-                  >mdi-face-profile</v-icon
-                >
+                <!-- <v-icon class="secondary--text">mdi-face-profile</v-icon> -->
                 Age
               </v-list-item-title>
             </v-list-item-content>
             <v-spacer></v-spacer>
             <v-list-item-content align="right">
-              <v-list-item-title>22</v-list-item-title>
+              <v-list-item-title>{{ moment().diff(user.birthdate, "years") }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
             
@@ -25,13 +23,13 @@
           <v-list-item >
             <v-list-item-content>
               <v-list-item-title>
-                <v-icon class="secondary--text">mdi-google-maps</v-icon>
+                <!-- <v-icon class="secondary--text">mdi-google-maps</v-icon> -->
                 Location
               </v-list-item-title>
             </v-list-item-content>
             <v-spacer></v-spacer>
             <v-list-item-content align="right">
-              <v-list-item-title>Aalborg</v-list-item-title>
+              <v-list-item-title>{{user.city}}</v-list-item-title>
             </v-list-item-content>
             
           </v-list-item>
@@ -40,16 +38,15 @@
           <v-list-item >
             <v-list-item-content>
               <v-list-item-title>
-                <v-icon class="secondary--text">mdi-phone</v-icon>
+                <!-- <v-icon class="secondary--text">mdi-phone</v-icon> -->
                 Phone</v-list-item-title
               >
             </v-list-item-content>
             <v-spacer></v-spacer>
             <v-list-item-content align="right">
-              <v-list-item-title>42529822</v-list-item-title>
+              <v-list-item-title>{{user.mobileNumber}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <!-- <LogoutSheet ref="logoutSheet"/> -->
         </v-list-item-group>
       </v-list>
     </v-card>
@@ -57,19 +54,23 @@
 </template>
 
 <script>
+import moment from "moment";
 
 export default {
+  data() {
+    return {
+      moment: moment
+    }
+  },
+  props: {
+    user: {
+      type: Object,
+      required: true
+    },
+  },
   components: {
-    // PrivacySheet,
-    // TermsSheet,
-    // LogoutSheet,
-    // SupportSheet
   },
   methods: {
-    // openSupportSheet() {
-    //   this.$refs.supportSheet.changeState(true);
-    // },
-    
   },
 };
 </script>

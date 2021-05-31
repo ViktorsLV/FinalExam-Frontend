@@ -11,9 +11,7 @@ const state = {
 
 const actions = {
     /* GET requests */
-    async getPosts({
-        commit
-    }) {
+    async getPosts({ commit }) {
         const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/posts?status=active`, {
             headers: {
                 'Accept': "application/json",
@@ -120,6 +118,23 @@ const actions = {
             console.log('Error:', error);
         }
     },
+    async bookPost({ commit }, {postId, status}) {
+        const response = await axios.post(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}/booking`, {status}, {
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json",
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
+            }
+        })
+        try {
+            commit('addBookedPost', response.data)
+            console.log(response.data);
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    },
+
+    /* PUT requests */
     async editPost({
         commit
     }, {
@@ -160,21 +175,6 @@ const actions = {
             console.log('Error:', error);
         }
     },
-    async bookPost({ commit }, {postId, status}) {
-        const response = await axios.post(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}/booking`, {status}, {
-            headers: {
-                'Accept': "application/json",
-                "Content-Type": "application/json",
-                'Authorization': "Bearer " + sessionStorage.getItem("token")
-            }
-        })
-        try {
-            commit('addBookedPost', response.data)
-            console.log(response.data);
-        } catch (error) {
-            console.log('Error:', error);
-        }
-    },
     async changePostState({ commit }, {postId, status}) {
         const response = await axios.put(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}`, {status}, {
             headers: {
@@ -205,6 +205,23 @@ const actions = {
             console.log('Error:', error);
         }
     },
+
+    /* DELETE requests */
+    async deletePost({ commit }, postId) {
+        const response = await axios.delete(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}`, {
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json",
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
+            }
+        })
+        try {
+            commit('removePost', postId)
+            console.log(response.data);
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    },
 }
 
 const mutations = {
@@ -221,6 +238,8 @@ const mutations = {
 
     updatePost: (state, id) => (state.posts.findIndex(post => post.id === id)),
     updateBooking: (state, id) => (state.bookedPosts.findIndex(booking => booking.id === id)),
+
+    removePost: (state, id) => (state.posts = state.posts.filter(post => post.id !== id))
 };
 const getters = {
     allPosts: state => state.posts,

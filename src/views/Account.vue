@@ -40,6 +40,7 @@ export default {
     };
   },
   async mounted() {
+    await this.$store.dispatch("fetchCurrentUser", this.currentUser.id);
     await this.$store.dispatch("fetchUser", this.currentUser.id);
     this.loading = false;
   },
