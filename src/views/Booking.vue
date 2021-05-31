@@ -68,11 +68,11 @@ export default {
       try {
         await this.$store.dispatch("bookPost", {
           postId: this.postId,
-          booked: true,
+          status: 'active',
         });
         await this.$store.dispatch("changePostState", {
           postId: this.postId,
-          booked: true,
+          status: 'booked',
         });
         this.$router.push('/tasks/my-deliveries')
       } catch (error) {

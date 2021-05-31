@@ -4,7 +4,9 @@ const state = {
     posts: [],
     post: {},
     usersPosts: [],
-    bookedPosts: []
+    bookedPosts: [],
+    finishedUsersPosts: [],
+    finishedBookedPosts: []
 };
 
 const actions = {
@@ -12,7 +14,7 @@ const actions = {
     async getPosts({
         commit
     }) {
-        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/posts?booked=false`, {
+        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/posts?status=active`, {
             headers: {
                 'Accept': "application/json",
                 "Content-Type": "application/json",
@@ -118,23 +120,33 @@ const actions = {
             console.log('Error:', error);
         }
     },
-    async bookPost({ commit }, {postId, booked}) {
-        const response = await axios.post(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}/booking`, {booked}, {
-            headers: {
-                'Accept': "application/json",
-                "Content-Type": "application/json",
-                'Authorization': "Bearer " + sessionStorage.getItem("token")
-            }
-        })
-        try {
-            commit('addBookedPost', response.data)
-            console.log(response.data);
-        } catch (error) {
-            console.log('Error:', error);
-        }
-    },
-    async changePostState({ commit }, {postId, booked}) {
-        const response = await axios.put(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}`, {booked}, {
+    async editPost({
+        commit
+    }, {
+        postId,
+        city,
+        street,
+        doorNumber,
+        bagNumber,
+        zip,
+        date,
+        time,
+        bagWeight,
+        bagType,
+        comments
+    }) {
+        const response = await axios.put(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}`, {
+            city,
+            street,
+            doorNumber,
+            bagNumber,
+            zip,
+            date,
+            time,
+            bagWeight,
+            bagType,
+            comments
+        }, {
             headers: {
                 'Accept': "application/json",
                 "Content-Type": "application/json",
@@ -148,6 +160,51 @@ const actions = {
             console.log('Error:', error);
         }
     },
+    async bookPost({ commit }, {postId, status}) {
+        const response = await axios.post(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}/booking`, {status}, {
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json",
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
+            }
+        })
+        try {
+            commit('addBookedPost', response.data)
+            console.log(response.data);
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    },
+    async changePostState({ commit }, {postId, status}) {
+        const response = await axios.put(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}`, {status}, {
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json",
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
+            }
+        })
+        try {
+            commit('updatePost', response.data)
+            console.log(response.data);
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    },
+    async changeBookingState({ commit }, {id, status}) {
+        const response = await axios.put(`${process.env.VUE_APP_ENDPOINT}/bookings/${id}`, {status}, {
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json",
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
+            }
+        })
+        try {
+            commit('updateBooking', response.data)
+            console.log(response.data);
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    },
 }
 
 const mutations = {
@@ -155,17 +212,25 @@ const mutations = {
     setSinglePost: (state, post) => state.post = post,
     setUsersPosts: (state, posts) => state.usersPosts = posts,
     setBookedPosts: (state, posts) => state.bookedPosts = posts,
+    
+    setFinishedUsersPosts: (state, posts) => state.finishedUsersPosts = posts,
+    setFinishedBookedPosts: (state, posts) => state.finishedBookedPosts = posts,
 
     addPost: (state, post) => state.posts.unshift(post),
     addBookedPost: (state, post) => state.bookedPosts.unshift(post),
 
     updatePost: (state, id) => (state.posts.findIndex(post => post.id === id)),
+    updateBooking: (state, id) => (state.bookedPosts.findIndex(booking => booking.id === id)),
 };
 const getters = {
     allPosts: state => state.posts,
+    singlePost: state => state.post,
+
     usersPosts: state => state.usersPosts,
     bookedPosts: state => state.bookedPosts,
-    singlePost: state => state.post
+    
+    finishedUsersPosts: state => state.finishedUsersPosts,
+    finishedBookedPosts: state => state.finishedBookedPosts,
 };
 
 export default {

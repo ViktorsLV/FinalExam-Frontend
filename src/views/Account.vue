@@ -14,7 +14,7 @@
           <OverviewCard  />
         </v-col>
         <v-col cols="12" class="pt-0 mt-5 mb-15">
-          <OtherCard class="mb-5"/>
+          <OtherCard class="mb-5" />
         </v-col>
       </v-row>
     </section>
@@ -40,12 +40,15 @@ export default {
     };
   },
   async mounted() {
-    await this.$store.dispatch("fetchCurrentUser");
+    await this.$store.dispatch("fetchUser", this.currentUser.id);
     this.loading = false;
   },
   computed: {
-    user() {
+    currentUser() {
       return this.$store.state.CurrentUser.currentUser;
+    },
+    user() {
+      return this.$store.state.User.user;
     },
   },
 };

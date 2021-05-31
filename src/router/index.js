@@ -106,6 +106,16 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/post/:id/edit-post',
+      name: 'Edit Post',
+      component: () => import('../views/EditPost.vue'),
+      props: true,
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
+    {
       path: '/tasks',
       component: () => import('../views/Tasks.vue'),
       meta: {

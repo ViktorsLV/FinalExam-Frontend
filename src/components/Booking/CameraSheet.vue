@@ -17,7 +17,7 @@
         <v-sheet class="primary" height="20vh">
           <div class="pt-5" align="center">
             <router-link :to="{ name: 'Receipt', params: { id: post.id } }">
-              <v-icon x-large class="white--text">mdi-camera</v-icon>
+              <v-icon x-large class="white--text" @click="completeDelivery()">mdi-camera</v-icon>
             </router-link>
           </div>
         </v-sheet>
@@ -33,6 +33,7 @@ export default {
       cameraSheet: false,
       absolute: false,
       zIndex: 20,
+      postId: "",
     };
   },
   props: {
@@ -41,9 +42,30 @@ export default {
       required: true,
     },
   },
+  // mounted () {
+  //   console.log();
+  // },
+  created () {
+    this.postId = this.$route.params.id;
+  },
   methods: {
     changeState(opened) {
       if (opened == true) this.cameraSheet = opened;
+    },
+    async completeDelivery() {
+      try {
+        await this.$store.dispatch("changeBookingState", {
+          id: this.post.booking.id,
+          status: 'finished',
+        });
+        await this.$store.dispatch("changePostState", {
+          postId: this.postId,
+          status: 'finished',
+        });
+        this.$router.push('/tasks/my-deliveries')
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 };

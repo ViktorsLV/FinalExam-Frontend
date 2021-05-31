@@ -7,10 +7,15 @@
           <!-- Avatar -->
           <v-list-item @click="$router.push({name: 'My Profile', params: { id: user.id }})">
             <v-list-item-avatar color="grey darken-3" size="70">
-              <v-img
+              <!-- <v-img
                 class="elevation-6"
                 alt="Profile"
                 src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+              ></v-img> -->
+              <v-img
+                class="elevation-6"
+                alt="Profile"
+                :src="api_url + user.profile_image.url"
               ></v-img>
             </v-list-item-avatar>
 
@@ -70,8 +75,12 @@ export default {
   data() {
     return {
       rating: 4.3,
+      api_url: 'http://localhost:1337'
     };
   },
+  // mounted () {
+  //   this.image = this.url + this.user.avatar;
+  // },
 };
 </script>
 

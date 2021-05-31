@@ -21,12 +21,15 @@
             />
           </v-card>
           <div align="center" class="profile">
-            <v-avatar class="" size="120" color="primary">
+            <v-avatar class="" size="120" color="primary" v-if="user.profile_image">
               <v-img
                 alt="Profile"
-                src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                :src="api_url + user.profile_image.url"
               />
             </v-avatar>
+            <v-avatar color="primary" v-else size="120">
+                <v-icon dark x-large> mdi-account </v-icon>
+              </v-avatar>
             <v-list-item-content>
               <v-list-item-title
                 >{{ user.firstName }} {{ user.lastName }}</v-list-item-title
@@ -83,6 +86,7 @@ export default {
       loading: true,
       rating: 4.3,
       moment: moment,
+      api_url: 'http://localhost:1337'
     };
   },
   async created() {

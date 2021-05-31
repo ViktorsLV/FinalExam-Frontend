@@ -30,6 +30,7 @@ export default {
     };
   },
   async mounted() {
+    await this.$store.dispatch("fetchCurrentUser");
     await this.$store.dispatch("getPosts");
     this.loading = false;
   },

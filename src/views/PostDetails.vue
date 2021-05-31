@@ -18,6 +18,9 @@
             :showProfile="false"
             :post="singlePost"
           />
+          <router-link :to="{ name: 'Edit Post', params: { id: singlePost.id } }">
+            <TheButton v-if="currentUser.id === user.id" :text="'edit post'"/>
+          </router-link>
         </v-col>
         <v-col cols="12" class="mt-2">
           <h1>User</h1>
@@ -50,10 +53,6 @@ export default {
       loading: true,
     };
   },
-  async created() {
-    const id = this.$route.params.id;
-    await this.$store.dispatch("getSinglePost", id);
-  },
   computed: {
     singlePost() {
       return this.$store.getters.singlePost;
@@ -65,7 +64,9 @@ export default {
       return this.$store.state.CurrentUser.currentUser;
     },
   },
-  mounted() {
+  async mounted() {
+    const id = this.$route.params.id;
+    await this.$store.dispatch("getSinglePost", id);
     this.loading = false;
   },
 };
