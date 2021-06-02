@@ -13,14 +13,28 @@
         </v-col>
         <!-- About You -->
         <v-col cols="12" class="pt-0 pb-0 mt-6">
-        <h4 class="headlineLight--text">About you</h4>
+          <h4 class="headlineLight--text">About you</h4>
         </v-col>
+        <!-- <v-col cols="12" class="pt-2 pb-0">
+          <v-file-input
+            :rules="avatarRules"
+            accept="image/png, image/jpeg, image/bmp"
+            placeholder="Pick an avatar"
+            prepend-icon="mdi-camera" 
+            label="Avatar"
+            v-model.trim="profile_image"
+            required
+            rounded
+            outlined
+            background-color="white"
+          ></v-file-input>
+        </v-col> -->
         <v-col cols="6" class="pt-2 pb-0">
           <v-text-field
             v-model.trim="firstName"
             type="text"
-            rounded
             label="First Name"
+            rounded
             required
             outlined
             background-color="white"
@@ -40,10 +54,11 @@
         <v-col cols="12" class="pt-0 pb-0">
           <v-textarea
             v-model.trim="about"
+            :rules="aboutRules"
+            :counter="150"
             type="text"
             rounded
             label="Few words about yourself"
-            required
             outlined
             background-color="white"
           ></v-textarea>
@@ -51,58 +66,46 @@
 
         <!-- Personal Info -->
         <v-col cols="12" class="pt-0 pb-0">
-        <h4 class="headlineLight--text">Personal information</h4>
+          <h4 class="headlineLight--text">Personal information</h4>
         </v-col>
         <v-col cols="6" class="pt-2 pb-0">
           <!-- <v-text-field
             
           ></v-text-field> -->
           <v-dialog
-        ref="dialog"
-        v-model="modal"
-        :return-value.sync="birthdate"
-        persistent
-        width="290px"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model.trim="birthdate"
-            type="text"
-            rounded
-            label="Birthdate"
-            required
-            outlined
-            background-color="white"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          v-model="birthdate"
-          :max="getEndDate"
-          scrollable
-        >
-          <v-spacer></v-spacer>
-          <v-btn
-            text
-            color="primary"
-            @click="modal = false"
+            ref="dialog"
+            v-model="modal"
+            :return-value.sync="birthdate"
+            persistent
+            width="290px"
           >
-            Cancel
-          </v-btn>
-          <v-btn
-            text
-            color="primary"
-            @click="$refs.dialog.save(birthdate)"
-          >
-            OK
-          </v-btn>
-        </v-date-picker>
-      </v-dialog>
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model.trim="birthdate"
+                type="text"
+                rounded
+                label="Birthdate"
+                required
+                outlined
+                background-color="white"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="birthdate" :max="getEndDate" scrollable>
+              <v-spacer></v-spacer>
+              <v-btn text color="primary" @click="modal = false">
+                Cancel
+              </v-btn>
+              <v-btn text color="primary" @click="$refs.dialog.save(birthdate)">
+                OK
+              </v-btn>
+            </v-date-picker>
+          </v-dialog>
         </v-col>
         <v-col cols="6" class="pt-2 pb-0">
-        <v-text-field
+          <v-text-field
             v-model.trim="city"
             type="text"
             rounded
@@ -113,7 +116,7 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12" class="pt-0 pb-0">
-        <v-text-field
+          <v-text-field
             v-model.trim="mobileNumber"
             type="text"
             rounded
@@ -124,7 +127,7 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12" class="pt-0 pb-0">
-        <v-text-field
+          <v-text-field
             v-model.trim="occupation"
             type="text"
             rounded
@@ -137,15 +140,10 @@
 
         <v-col cols="12" class="pt-0 mb-15">
           <TheButton
-          class="mb-10"
+            class="mb-10"
             :text="'save changes'"
             @click="editProfile"
-             :disabled="
-              !firstName.length ||
-              !lastName.length
-                ? true
-                : false
-            "
+            :disabled="!firstName.length || !lastName.length ? true : false"
           />
           <!-- <v-btn
            
@@ -180,16 +178,23 @@ export default {
       loading: true,
       id: "",
       modal: false,
+      aboutRules: [
+        (v) => v.length <= 150 || "Text must be less than 150 characters",
+      ],
+      avatarRules: [
+        value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+      ],
 
-      firstName: '',
-      lastName: '',
-      about: '',
+      profile_image: null,
+      firstName: "",
+      lastName: "",
+      about: "",
 
       birthdate: new Date().toISOString().substr(0, 10),
-      city: '',
+      city: "",
 
-      mobileNumber: '',
-      occupation: ''
+      mobileNumber: "",
+      occupation: "",
     };
   },
   methods: {
@@ -197,6 +202,7 @@ export default {
       try {
         await this.$store.dispatch("editProfile", {
           id: this.id,
+          // profile_image: this.profile_image,
           firstName: this.firstName,
           lastName: this.lastName,
           about: this.about,
@@ -219,12 +225,13 @@ export default {
       return this.$store.state.User.user;
     },
     getEndDate() {
-     const endDate = new Date();
-     return endDate.toISOString().slice(0,10)
-    }
+      const endDate = new Date();
+      return endDate.toISOString().slice(0, 10);
+    },
   },
-   mounted() {
+  mounted() {
     this.id = this.$store.state.User.user.id;
+    this.profile_image = this.$store.state.User.user.profile_image.url;
     this.firstName = this.$store.state.User.user.firstName;
     this.lastName = this.$store.state.User.user.lastName;
     this.about = this.$store.state.User.user.about;

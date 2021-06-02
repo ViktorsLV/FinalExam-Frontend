@@ -182,8 +182,8 @@ const router = new VueRouter({
       }
     },
     {
-      path: '/conversation',
-      name: 'Conversation',
+      path: '/messages/user/:id',
+      name: 'Message User',
       component: () => import('../views/Conversation.vue'),
       meta: {
         layout: 'main',
@@ -201,7 +201,7 @@ const router = new VueRouter({
     },
     {
       path: "/account/profile/:id",
-      name: "My Profile",
+      name: "Profile",
       props: true,
       component: () => import('../views/Account/Profile.vue'),
       meta: {

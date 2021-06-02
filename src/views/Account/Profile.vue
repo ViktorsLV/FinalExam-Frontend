@@ -21,15 +21,23 @@
             />
           </v-card>
           <div align="center" class="profile">
-            <v-avatar class="" size="120" color="primary" v-if="user.profile_image">
+            <v-list-item-avatar
+              color="primary"
+              size="120"
+              v-if="
+                user.profile_image === null ||
+                !user.profile_image.url
+              "
+            >
+              <v-icon dark x-large> mdi-account </v-icon>
+            </v-list-item-avatar>
+            <v-list-item-avatar color="grey darken-3" size="120" v-else>
               <v-img
-                alt="Profile"
+                class="elevation-6"
+                alt=""
                 :src="api_url + user.profile_image.url"
-              />
-            </v-avatar>
-            <v-avatar color="primary" v-else size="120">
-                <v-icon dark x-large> mdi-account </v-icon>
-              </v-avatar>
+              ></v-img>
+            </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title
                 >{{ user.firstName }} {{ user.lastName }}</v-list-item-title
@@ -54,11 +62,14 @@
           <StatisticCard :user="user"/>
         </v-col>
         <v-col cols="12" class="pt-0">
+          <AboutCard :user="user"/>
+        </v-col>
+        <v-col cols="12" class="pt-0 mb-5">
           <ProfileInfoCard :user="user"/>
         </v-col>
         <v-col cols="12" class="py-0 mb-15">
           <router-link :to="{ name: 'Edit Profile', params: { id: user.id } }">
-          <TheButton :text="'edit profile'" class="mb-10"/>
+          <TheButton v-if="currentUser.id === user.id" :text="'edit profile'" class="mb-10"/>
           </router-link>
         </v-col>
       </v-row>
@@ -69,6 +80,7 @@
 <script>
 import TheLoader from "@/components/app/TheLoader.vue";
 import ProfileInfoCard from "@/components/Account/ProfileInfoCard.vue";
+import AboutCard from "@/components/Account/AboutCard.vue";
 import StatisticCard from "@/components/Account/StatisticCard.vue";
 import TheButton from "@/components/app/TheButton.vue";
 import moment from "moment";
@@ -78,6 +90,7 @@ export default {
   components: {
     TheLoader,
     ProfileInfoCard,
+    AboutCard,
     StatisticCard,
     TheButton
   },
@@ -92,6 +105,7 @@ export default {
   async created() {
     const id = this.$route.params.id;
     await this.$store.dispatch("fetchUser", id);
+    await this.$store.dispatch("fetchCurrentUser", id);
   },
   mounted() {
     this.loading = false;
@@ -99,6 +113,9 @@ export default {
   computed: {
     user() {
       return this.$store.state.User.user;
+    },
+    currentUser() {
+      return this.$store.state.CurrentUser.currentUser;
     },
   },
 };

@@ -134,6 +134,14 @@
                 </div>
                 <div align="right">
                   <v-btn
+                  class="mr-3"
+                    color="primary"
+                    rounded
+                    @click="(e1 = 1), (progress = 33)"
+                  >
+                    Back
+                  </v-btn>
+                  <v-btn
                     :disabled="
                       !city.length ||
                       !street.length ||
@@ -155,9 +163,9 @@
           <v-stepper-content step="3">
             <h5 align="left" class="mb-4">Preferences</h5>
             <v-row height="65vh">
-              <v-col cols="6" class="pt-0">
+              <v-col cols="12" class="pt-0">
                 <v-dialog
-                  ref="dialog"
+                  ref="dateDialog"
                   v-model="modal"
                   :return-value.sync="date"
                   persistent
@@ -165,18 +173,20 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
-                      v-model="date"
-                      label="Date"
+                      v-model.trim="date"
+                      type="text"
+                      rounded
+                      label="Pickup Date"
+                      required
+                      dense
+                      outlined
+                      background-color="white"
+                      readonly
                       v-bind="attrs"
                       v-on="on"
-                      readonly
-                      dense
-                      rounded
-                      required
-                      outlined
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="date" scrollable>
+                  <v-date-picker v-model="date" :min="getStartDate" scrollable>
                     <v-spacer></v-spacer>
                     <v-btn text color="primary" @click="modal = false">
                       Cancel
@@ -184,16 +194,16 @@
                     <v-btn
                       text
                       color="primary"
-                      @click="$refs.dialog.save(date)"
+                      @click="$refs.dateDialog.save(date)"
                     >
                       OK
                     </v-btn>
                   </v-date-picker>
                 </v-dialog>
               </v-col>
-              <v-col cols="6" class="pt-0">
+              <!-- <v-col cols="6" class="pt-0">
                 <v-dialog
-                  ref="dialog"
+                  ref="timeDialog"
                   v-model="modal2"
                   :return-value.sync="time"
                   persistent
@@ -217,6 +227,7 @@
                     v-model="time"
                     full-width
                     format="24hr"
+                    use-seconds
                   >
                     <v-spacer></v-spacer>
                     <v-btn text color="primary" @click="modal2 = false">
@@ -225,20 +236,20 @@
                     <v-btn
                       text
                       color="primary"
-                      @click="$refs.dialog.save(time)"
+                      @click="$refs.timeDialog.save(time)"
                     >
                       OK
                     </v-btn>
                   </v-time-picker>
                 </v-dialog>
-              </v-col>
+              </v-col> -->
               <v-col cols="12" class="pt-0">
                 <v-textarea
                   v-model.trim="comments"
                   dense
                   type="text"
                   rounded
-                  label="Additional comments"
+                  label="Additional comments (optional)"
                   required
                   outlined
                 ></v-textarea>
@@ -254,7 +265,15 @@
                 </div>
                 <div align="right">
                   <v-btn
-                    :disabled="!date.length || !time.length"
+                  class="mr-3"
+                    color="primary"
+                    rounded
+                    @click="(e1 = 2), (progress = 66)"
+                  >
+                    Back
+                  </v-btn>
+                  <v-btn
+                    :disabled="!date.length"
                     color="primary"
                     rounded
                     @click="(e1 = 4), (progress = 100)"
@@ -281,10 +300,10 @@
                     <v-icon class="secondary--text">mdi-calendar</v-icon>
                     {{ date }}
                   </span>
-                  <span class="ml-6">
+                  <!-- <span class="ml-6">
                     <v-icon class="secondary--text">mdi-clock</v-icon>
                     {{ time }}
-                  </span>
+                  </span> -->
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -310,7 +329,7 @@
               </v-list-item-content>
             </v-list-item>
             <div align="center">
-              <TheButton :text="'post'" @click="addPost()"/>
+              <TheButton :text="'post'" @click="addPost()" />
             </div>
           </v-stepper-content>
         </v-stepper-items>
@@ -349,10 +368,10 @@ export default {
       zipCode: "",
 
       /* 3rd */
-      date: new Date().toISOString().substr(0, 10),
+      date: '',
       modal: false,
       comments: "",
-      time: "12:00",
+      time: "",
       modal2: false,
     };
   },
@@ -360,22 +379,28 @@ export default {
     async addPost() {
       // e.preventDefault();
       try {
-        await this.$store.dispatch('createPost', {
+        await this.$store.dispatch("createPost", {
           city: this.city,
           street: this.street,
           doorNumber: this.doorNumber,
           bagNumber: this.bagNumber,
           zip: this.zipCode,
           date: this.date,
-          time: '12:00:00',
+          // time: this.time,
           bagWeight: this.weight,
           bagType: this.bagType,
-          comments: this.comments
-        })
-        this.$router.push('/tasks')
+          comments: this.comments,
+        });
+        this.$router.push("/tasks");
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
+    },
+  },
+  computed: {
+    getStartDate() {
+      const endDate = new Date();
+      return endDate.toISOString().slice(0, 10);
     },
   },
 };

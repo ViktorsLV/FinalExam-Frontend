@@ -76,12 +76,13 @@
               </v-row>
             </div>
           </v-card>
-          <div align="center" class="mb-10">
+          <div align="center" class="mb-15">
             <v-btn
               class="primary white--text font-weight-bold mt-5 mb-10"
               width="80%"
               rounded
               large
+              disabled
               >Go to graitor's app</v-btn
             >
           </div>

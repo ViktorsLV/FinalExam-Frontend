@@ -25,7 +25,7 @@
             </div>
             <div class="pt-6">
               <h3 class="">You have saved</h3>
-              <p class="mb-0 pb-0 secondary--text font-weight-bold">14kg CO2</p>
+              <p class="mb-0 pb-0 secondary--text font-weight-bold">1.5kg CO2</p>
             </div>
             <div class="mt-10">
               <h4 class="ml-3 mb-2" align="left">Earn points by inviting your friends</h4>

@@ -5,17 +5,24 @@
       <v-list class="rounded-xl">
         <v-list-item-group color="primary">
           <!-- Avatar -->
-          <v-list-item @click="$router.push({name: 'My Profile', params: { id: user.id }})">
-            <v-list-item-avatar color="grey darken-3" size="70" v-if="user.profile_image">
+          <v-list-item @click="$router.push({name: 'Profile', params: { id: user.id }})">
+            <v-list-item-avatar
+            size="70"
+              color="primary"
+              v-if="
+                user.profile_image === null ||
+                !user.profile_image.url
+              "
+            >
+              <v-icon dark> mdi-account </v-icon>
+            </v-list-item-avatar>
+            <v-list-item-avatar color="grey darken-3" v-else size="70">
               <v-img
                 class="elevation-6"
-                alt="Profile"
+                alt=""
                 :src="api_url + user.profile_image.url"
               ></v-img>
             </v-list-item-avatar>
-            <v-avatar color="primary" v-else size="70">
-                <v-icon dark x-large> mdi-account </v-icon>
-              </v-avatar>
 
             <v-list-item-content>
               <v-list-item-title

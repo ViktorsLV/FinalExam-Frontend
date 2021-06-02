@@ -88,7 +88,7 @@ const actions = {
         bagNumber,
         zip,
         date,
-        time,
+        // time,
         bagWeight,
         bagType,
         comments
@@ -100,7 +100,7 @@ const actions = {
             bagNumber,
             zip,
             date,
-            time,
+            // time,
             bagWeight,
             bagType,
             comments
@@ -145,7 +145,7 @@ const actions = {
         bagNumber,
         zip,
         date,
-        time,
+        // time,
         bagWeight,
         bagType,
         comments
@@ -157,7 +157,7 @@ const actions = {
             bagNumber,
             zip,
             date,
-            time,
+            // time,
             bagWeight,
             bagType,
             comments
@@ -230,8 +230,8 @@ const mutations = {
     setUsersPosts: (state, posts) => state.usersPosts = posts,
     setBookedPosts: (state, posts) => state.bookedPosts = posts,
     
-    setFinishedUsersPosts: (state, posts) => state.finishedUsersPosts = posts,
-    setFinishedBookedPosts: (state, posts) => state.finishedBookedPosts = posts,
+    // setFinishedUsersPosts: (state, posts) => state.finishedUsersPosts = posts,
+    // setFinishedBookedPosts: (state, posts) => state.finishedBookedPosts = posts,
 
     addPost: (state, post) => state.posts.unshift(post),
     addBookedPost: (state, post) => state.bookedPosts.unshift(post),
@@ -248,8 +248,8 @@ const getters = {
     usersPosts: state => state.usersPosts,
     bookedPosts: state => state.bookedPosts,
     
-    finishedUsersPosts: state => state.finishedUsersPosts,
-    finishedBookedPosts: state => state.finishedBookedPosts,
+    // finishedUsersPosts: state => state.finishedUsersPosts,
+    // finishedBookedPosts: state => state.finishedBookedPosts,
 };
 
 export default {

@@ -25,8 +25,8 @@
         <v-col cols="12" class="mt-2">
           <h1>User</h1>
           <UserCardSmall :user="user" />
-          <router-link :to="{ name: 'Booking', params: { id: singlePost.id } }">
-            <TheButton v-if="currentUser.id != user.id" :text="'start booking'"/>
+          <router-link :to="{ name: 'Booking', params: { id: singlePost.id } }" >
+            <TheButton v-if="currentUser.id != user.id" :text="'start booking'" class="mt-8"/>
           </router-link>
         </v-col>
       </v-row>

@@ -19,6 +19,20 @@
           </v-list-item>
           <v-divider></v-divider>
 
+          <v-list-item > 
+            <v-list-item-content>
+              <v-list-item-title>
+                <v-icon class="secondary--text">mdi-recycle</v-icon>
+                CO2 saved</v-list-item-title
+              >
+            </v-list-item-content>
+            <v-spacer></v-spacer>
+            <v-list-item-content align="right">
+              <v-list-item-title>1.5kg</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+
           <!-- <v-list-item @click="$router.push({path: '/account/invite-friends'})"> -->
           <v-list-item >
             <v-list-item-content>

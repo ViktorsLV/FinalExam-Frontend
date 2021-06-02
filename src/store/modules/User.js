@@ -18,10 +18,35 @@ const actions = {
             console.log('Error:', error);
         }
     },
-    async editProfile({ commit }, {id, firstName, lastName, about, birthdate, city, mobileNumber, occupation}) {
-        const response = await axios.put(`${process.env.VUE_APP_ENDPOINT}/users/${id}`, {
-            firstName, lastName, occupation, about, birthdate, city, mobileNumber
-        }, {
+    // async editProfile({ commit }, {id, profile_image, firstName, lastName, about, birthdate, city, mobileNumber, occupation}) { 
+    //     const formData = new FormData()
+        
+    //     formData.append('profile_image', profile_image)
+    //     formData.append('firstName', firstName)
+    //     formData.append('lastName', lastName)
+    //     formData.append('about', about)
+    //     formData.append('birthdate', birthdate)
+    //     formData.append('city', city)
+    //     formData.append('mobileNumber', mobileNumber)
+    //     formData.append('occupation', occupation)
+
+    //     const response = await axios.put(`${process.env.VUE_APP_ENDPOINT}/users/${id}`, formData, {
+    //         headers: {
+    //            'Content-Type': 'multipart/form-data',
+    //             'Accept': "application/json",
+    //             'Authorization': "Bearer " + sessionStorage.getItem("token")
+    //         }
+    //     })
+    //     try {
+    //         commit('updateProfile', response.data)
+    //         console.log(response.data)
+    //     } catch (error) {
+    //         console.log('Error:', error);
+    //     }
+    // },
+    async editProfile({ commit }, {id, firstName, lastName, about, birthdate, city, mobileNumber, occupation}) { 
+
+        const response = await axios.put(`${process.env.VUE_APP_ENDPOINT}/users/${id}`, {id, firstName, lastName, about, birthdate, city, mobileNumber, occupation}, {
             headers: {
                 'Accept': "application/json",
                 "Content-Type": "application/json",

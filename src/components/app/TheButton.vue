@@ -7,6 +7,7 @@
     rounded
     large
     :disabled="disabled"
+    :outlined="outlined"
     >{{ text }}</v-btn
   >
 </template>
@@ -20,6 +21,10 @@ export default {
       required: true,
     },
     disabled: {
+      type: Boolean, 
+      default: false
+    },
+    outlined: {
       type: Boolean, 
       default: false
     },

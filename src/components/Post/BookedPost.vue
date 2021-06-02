@@ -4,19 +4,28 @@
       <v-card-actions>
         <v-list-item class="grow">
           <router-link
-            :to="{ name: 'My Profile', params: { id: post.author.id } }"
+            :to="{ name: 'Profile', params: { id: post.author.id } }"
           >
-            <v-list-item-avatar color="grey darken-3">
+            <v-list-item-avatar
+              color="primary"
+              v-if="
+                post.author.profile_image === null ||
+                !post.author.profile_image.url
+              "
+            >
+              <v-icon dark> mdi-account </v-icon>
+            </v-list-item-avatar>
+            <v-list-item-avatar color="grey darken-3" v-else>
               <v-img
                 class="elevation-6"
                 alt=""
-                src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                :src="api_url + post.author.profile_image.url"
               ></v-img>
             </v-list-item-avatar>
           </router-link>
 
           <router-link
-            :to="{ name: 'My Profile', params: { id: post.author.id } }"
+            :to="{ name: 'Profile', params: { id: post.author.id } }"
           >
             <v-list-item-content>
               <v-list-item-title
@@ -95,17 +104,31 @@
           <v-list-item-subtitle>{{ post.comments }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
+      <v-divider></v-divider>
+      <router-link :to="{ name: 'Message User', params: { id: post.author.id } }">
+        <v-list-item>
+          <v-list-item-content align="center">
+            <v-list-item-title
+              class="primary--text text-uppercase font-weight-bold"
+            >
+              Message User</v-list-item-title
+            >
+          </v-list-item-content>
+        </v-list-item>
+      </router-link>
     </v-card>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+
 export default {
   data() {
     return {
       rating: 4.3,
       moment: moment,
+      api_url: process.env.VUE_APP_ENDPOINT,
     };
   },
   props: {

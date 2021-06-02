@@ -62,7 +62,7 @@ export default {
           postId: this.postId,
           status: 'finished',
         });
-        this.$router.push('/tasks/my-deliveries')
+        // this.$router.push('/tasks/my-deliveries')
       } catch (error) {
         console.log(error)
       }

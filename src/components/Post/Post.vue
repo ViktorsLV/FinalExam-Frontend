@@ -11,16 +11,22 @@
       >
         <v-card-actions v-if="showProfile">
           <v-list-item class="grow">
-            <v-list-item-avatar color="grey darken-3" v-if="post.author.profile_image">
+            <v-list-item-avatar
+              color="primary"
+              v-if="
+                post.author.profile_image === null ||
+                !post.author.profile_image.url
+              "
+            >
+              <v-icon dark> mdi-account </v-icon>
+            </v-list-item-avatar>
+            <v-list-item-avatar color="grey darken-3" v-else>
               <v-img
                 class="elevation-6"
                 alt=""
                 :src="api_url + post.author.profile_image.url"
               ></v-img>
             </v-list-item-avatar>
-              <v-list-item-avatar color="primary" v-else>
-                <v-icon dark> mdi-account </v-icon>
-              </v-list-item-avatar>
 
             <v-list-item-content>
               <v-list-item-title

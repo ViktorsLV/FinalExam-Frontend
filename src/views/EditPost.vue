@@ -96,9 +96,9 @@
             background-color="white"
           ></v-text-field>
         </v-col>
-        <v-col cols="6" class="pt-0">
+        <v-col cols="12" class="pt-0">
           <v-dialog
-            ref="dialog"
+            ref="dateDialog"
             v-model="modal"
             :return-value.sync="date"
             persistent
@@ -106,16 +106,17 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date"
-                label="Date"
-                v-bind="attrs"
-                v-on="on"
-                readonly
-                dense
+                v-model.trim="date"
+                type="text"
                 rounded
+                label="Pickup Date"
                 required
+                dense
                 outlined
                 background-color="white"
+                readonly
+                v-bind="attrs"
+                v-on="on"
               ></v-text-field>
             </template>
             <v-date-picker v-model="date" :min="getStartDate" scrollable>
@@ -123,15 +124,15 @@
               <v-btn text color="primary" @click="modal = false">
                 Cancel
               </v-btn>
-              <v-btn text color="primary" @click="$refs.dialog.save(date)">
+              <v-btn text color="primary" @click="$refs.dateDialog.save(date)">
                 OK
               </v-btn>
             </v-date-picker>
           </v-dialog>
         </v-col>
-        <v-col cols="6" class="pt-0">
+        <!-- <v-col cols="6" class="pt-0">
           <v-dialog
-            ref="dialog"
+            ref="timeDialog"
             v-model="modal2"
             :return-value.sync="time"
             persistent
@@ -147,8 +148,8 @@
                 dense
                 rounded
                 required
-                outlined
                 background-color="white"
+                outlined
               ></v-text-field>
             </template>
             <v-time-picker
@@ -161,12 +162,12 @@
               <v-btn text color="primary" @click="modal2 = false">
                 Cancel
               </v-btn>
-              <v-btn text color="primary" @click="$refs.dialog.save(time)">
+              <v-btn text color="primary" @click="$refs.timeDialog.save(time)">
                 OK
               </v-btn>
             </v-time-picker>
           </v-dialog>
-        </v-col>
+        </v-col> -->
         <v-col cols="12" class="pt-0 pb-0">
           <v-textarea
             v-model.trim="comments"
@@ -186,7 +187,6 @@
             @click="editPost"
             :disabled="
               !date.length ||
-              !time.length ||
               !city.length ||
               !street.length ||
               !doorNumber.length ||
@@ -209,7 +209,7 @@
           >
         </v-col>
       </v-row>
-      <PostDeleteModal ref="deletePostModal" :postId="id"/>
+      <PostDeleteModal ref="deletePostModal" :postId="id" />
     </section>
   </div>
 </template>
@@ -224,13 +224,13 @@ export default {
   components: {
     TheLoader,
     TheButton,
-    PostDeleteModal
+    PostDeleteModal,
   },
   data() {
     return {
       loading: true,
       id: "",
-      today: new Date(), 
+      today: new Date(),
 
       /* 1st */
       bagTypes: [
@@ -253,7 +253,7 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       modal: false,
       comments: "",
-      time: "12:00",
+      time: "",
       modal2: false,
     };
   },
@@ -269,7 +269,7 @@ export default {
           bagNumber: this.bagNumber,
           zip: this.zipCode,
           date: this.date,
-          time: "12:00:00",
+          // time: this.time,
           bagWeight: this.weight,
           bagType: this.bagType,
           comments: this.comments,
@@ -294,9 +294,9 @@ export default {
       return this.$store.state.CurrentUser.currentUser;
     },
     getStartDate() {
-     const startDate = new Date();
-     return startDate.toISOString().slice(0,10)
-    }
+      const startDate = new Date();
+      return startDate.toISOString().slice(0, 10);
+    },
   },
   async mounted() {
     this.id = this.$route.params.id;
