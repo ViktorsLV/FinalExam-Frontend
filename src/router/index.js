@@ -246,6 +246,24 @@ const router = new VueRouter({
         auth: true
       },
     },
+    {
+      path: "/account/verifications/phone",
+      name: "Verify Phone Number",
+      component: () => import('../views/Account/PhoneVerification.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
+    {
+      path: "/account/verifications/id",
+      name: "Verify ID",
+      component: () => import('../views/Account/IdVerification.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
   ]
 })
 
@@ -253,12 +271,12 @@ router.beforeEach((to, from, next) => {
   const requireAuth = to.matched.some(record => record.meta.auth)
 
   if (requireAuth && (sessionStorage.getItem("token") === null)) {
-    document.title = "Login | My Graitor Account";
+    document.title = "Login | e-pant";
     next({
       name: 'Login'
     })
   } else {
-    document.title = to.name + " | My Graitor Account";
+    document.title = to.name + " | e-pant";
     next()
   }
 })
