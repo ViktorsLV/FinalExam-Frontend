@@ -31,6 +31,11 @@
         <p class="caption mb-0 pb-0">
           Member since {{ moment(user.created_at).format("l") }}
         </p>
+        <div align="right" class="mt-5 mr-2">
+          <v-card width="max-content" height="max-content" class="primary white--text" rounded="xl" v-for="(message, index) in messages" :key="index">
+          <p class="pa-2" > {{message}} </p>
+          </v-card>
+        </div>
       </div>
     </v-card>
     <v-row justify="center" class="mt-2">
@@ -40,7 +45,8 @@
           required
           rounded
           outlined
-          append-icon="mdi-send"
+          :append-icon="message.length ? 'mdi-send' : ''"
+          @click:append="clear()"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -55,6 +61,7 @@ export default {
     return {
       rating: 3.8,
       message: "",
+      messages: [],
       moment: moment,
       api_url: process.env.VUE_APP_ENDPOINT,
     };
@@ -64,6 +71,12 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  methods: {
+    clear() {
+      this.messages.push(this.message)
+      this.message = ''
+    }
   },
 };
 </script>

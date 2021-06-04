@@ -148,7 +148,7 @@ export default {
   data() {
     return {
       moment: moment,
-      panel: [0],
+      panel: [0], 
     };
   },
   async mounted() {

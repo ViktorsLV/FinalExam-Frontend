@@ -116,6 +116,16 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/post/:id/leave-review',
+      name: 'Leave Review',
+      component: () => import('../views/LeaveReview.vue'),
+      props: true,
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
+    {
       path: '/tasks',
       component: () => import('../views/Tasks.vue'),
       meta: {
@@ -210,6 +220,16 @@ const router = new VueRouter({
       },
     },
     {
+      path: "/account/profile/:id/reviews",
+      name: "User Reviews",
+      props: true,
+      component: () => import('../views/Account/UserReviews.vue'),
+      meta: {
+        layout: 'main',
+        auth: true
+      },
+    },
+    {
       path: "/account/profile/:id/edit",
       name: "Edit Profile",
       props: true,
@@ -264,7 +284,10 @@ const router = new VueRouter({
         auth: true
       },
     },
-  ]
+  ],
+  scrollBehavior() {
+    document.getElementById('app').scrollIntoView();
+}
 })
 
 router.beforeEach((to, from, next) => {

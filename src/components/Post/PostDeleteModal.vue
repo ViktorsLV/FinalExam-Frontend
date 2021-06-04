@@ -9,7 +9,7 @@
         <v-card-actions class="mt-4">
           <v-spacer></v-spacer>
           <v-btn color="secondary" outlined rounded @click="dialog = false"> Cancel </v-btn>
-          <v-btn color="delete" outlined rounded @click="deletePost"> Yes </v-btn>
+          <v-btn color="delete" dark rounded @click="deletePost"> Yes </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

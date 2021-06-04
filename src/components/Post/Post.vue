@@ -11,42 +11,47 @@
       >
         <v-card-actions v-if="showProfile">
           <v-list-item class="grow">
-            <v-list-item-avatar
-              color="primary"
-              v-if="
-                post.author.profile_image === null ||
-                !post.author.profile_image.url
-              "
-            >
-              <v-icon dark> mdi-account </v-icon>
-            </v-list-item-avatar>
-            <v-list-item-avatar color="grey darken-3" v-else>
-              <v-img
-                class="elevation-6"
-                alt=""
-                :src="api_url + post.author.profile_image.url"
-              ></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title
-                >{{ post.author.firstName }} 
-                {{ post.author.lastName }}</v-list-item-title
+            <div>
+              <v-list-item-avatar
+                color="primary"
+                v-if="
+                  post.author.profile_image === null ||
+                  !post.author.profile_image.url
+                "
               >
-              <v-rating
-                v-model="rating"
-                background-color="black"
-                color="yellow accent-4"
-                dense
-                half-increments
-                hover
-                size="12"
-              ></v-rating>
-            </v-list-item-content>
+                <v-icon dark> mdi-account </v-icon>
+              </v-list-item-avatar>
+              <v-list-item-avatar color="grey darken-3" v-else>
+                <v-img
+                  class="elevation-6"
+                  alt=""
+                  :src="api_url + post.author.profile_image.url"
+                ></v-img>
+              </v-list-item-avatar>
+            </div>
 
+            <div>
+              <v-list-item-content>
+                <v-list-item-title
+                  >{{ post.author.firstName }}
+                  {{
+                    post.author.lastName.substring(0, 1) + "."
+                  }}</v-list-item-title
+                >
+                <v-rating
+                  v-model="rating"
+                  background-color="black"
+                  color="yellow accent-4"
+                  dense
+                  half-increments
+                  hover
+                  size="12"
+                ></v-rating>
+              </v-list-item-content>
+            </div>
             <v-row align="center" justify="end">
-              <span class="caption"
-                >Posted on
+              <span class="caption">
+                Posted on
                 {{ moment(post.published_at).format("MMM Do, YYYY") }}</span
               >
             </v-row>
@@ -105,7 +110,9 @@
             <v-list-item-subtitle>{{ post.bagType }}</v-list-item-subtitle>
 
             <v-list-item-title class="mt-3">Preferences</v-list-item-title>
-            <v-list-item-subtitle v-if="post.comments">{{ post.comments }}</v-list-item-subtitle>
+            <v-list-item-subtitle v-if="post.comments">{{
+              post.comments
+            }}</v-list-item-subtitle>
             <v-list-item-subtitle v-else>-</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -121,7 +128,7 @@ export default {
     return {
       rating: 4.3,
       moment: moment,
-      api_url: process.env.VUE_APP_ENDPOINT
+      api_url: process.env.VUE_APP_ENDPOINT,
     };
   },
   props: {

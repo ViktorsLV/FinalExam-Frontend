@@ -7,8 +7,10 @@
       </v-col>
       <v-col cols="10" align="center" class="mx-auto">
         <h3 class="mt-3">
-          You will be able to see the time, address and bags you need to pick up
-          so it suits you best.
+          Check the date, address and bags that need to be picked up. 
+        </h3>
+        <h3 class="mt-3">
+          Pick the option that suits you the best!
         </h3>
       </v-col>
       <v-col cols="10" align="center" class="mx-auto"> 

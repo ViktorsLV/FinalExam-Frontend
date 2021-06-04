@@ -18,16 +18,20 @@
             :showProfile="false"
             :post="singlePost"
           />
-          <router-link :to="{ name: 'Edit Post', params: { id: singlePost.id } }">
-            <TheButton v-if="currentUser.id === user.id" :text="'edit post'"/>
+          <router-link :to="{ name: 'Edit Post', params: { id: singlePost.id } }" v-if="(currentUser.id === user.id) && (singlePost.status !== 'booked')">
+            <TheButton  :text="'edit post'"/>
           </router-link>
         </v-col>
-        <v-col cols="12" class="mt-2">
+        <v-col cols="12" class="mt-2" v-if="singlePost.status !== 'booked'">
           <h1>User</h1>
           <UserCardSmall :user="user" />
           <router-link :to="{ name: 'Booking', params: { id: singlePost.id } }" >
             <TheButton v-if="currentUser.id != user.id" :text="'start booking'" class="mt-8"/>
           </router-link>
+        </v-col>
+        <v-col cols="12" class="mt-2" v-else>
+          <h1>Booked By:</h1>
+          <UserCardBooked :userId="singlePost.booking.author" />
         </v-col>
       </v-row>
     </section>
@@ -38,6 +42,7 @@
 import TheLoader from "@/components/app/TheLoader.vue";
 import Post from "@/components/Post/Post.vue";
 import UserCardSmall from "@/components/User/UserCardSmall.vue";
+import UserCardBooked from "@/components/User/UserCardBooked.vue";
 import TheButton from "@/components/app/TheButton.vue";
 
 export default {
@@ -46,6 +51,7 @@ export default {
     TheLoader,
     Post,
     UserCardSmall,
+    UserCardBooked,
     TheButton
   },
   data() {

@@ -12,7 +12,7 @@ const state = {
 const actions = {
     /* GET requests */
     async getPosts({ commit }) {
-        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/posts?status=active`, {
+        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/posts?status=active&_sort=published_at:DESC`, {
             headers: {
                 'Accept': "application/json",
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const actions = {
     async getUsersPosts({
         commit
     }, userId) {
-        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/posts?author.id=${userId}`, {
+        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/posts?author.id=${userId}&_sort=published_at:DESC`, {
             headers: {
                 'Accept': "application/json",
                 "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const actions = {
     async getBookedPosts({
         commit
     }, userId) {
-        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/bookings?author.id=${userId}`, {
+        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/bookings?author.id=${userId}&_sort=published_at:DESC`, {
             headers: {
                 'Accept': "application/json",
                 "Content-Type": "application/json",
@@ -128,6 +128,21 @@ const actions = {
         })
         try {
             commit('addBookedPost', response.data)
+            console.log(response.data);
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    },
+    async reviewPost({ commit }, {postId, message, rating}) {
+        const response = await axios.post(`${process.env.VUE_APP_ENDPOINT}/posts/${postId}/review`, {message, rating}, {
+            headers: {
+                'Accept': "application/json",
+                "Content-Type": "application/json",
+                'Authorization': "Bearer " + sessionStorage.getItem("token")
+            }
+        })
+        try {
+            commit('updatePost', response.data)
             console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
@@ -229,9 +244,6 @@ const mutations = {
     setSinglePost: (state, post) => state.post = post,
     setUsersPosts: (state, posts) => state.usersPosts = posts,
     setBookedPosts: (state, posts) => state.bookedPosts = posts,
-    
-    // setFinishedUsersPosts: (state, posts) => state.finishedUsersPosts = posts,
-    // setFinishedBookedPosts: (state, posts) => state.finishedBookedPosts = posts,
 
     addPost: (state, post) => state.posts.unshift(post),
     addBookedPost: (state, post) => state.bookedPosts.unshift(post),
@@ -247,9 +259,6 @@ const getters = {
 
     usersPosts: state => state.usersPosts,
     bookedPosts: state => state.bookedPosts,
-    
-    // finishedUsersPosts: state => state.finishedUsersPosts,
-    // finishedBookedPosts: state => state.finishedBookedPosts,
 };
 
 export default {

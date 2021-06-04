@@ -6,7 +6,7 @@
         <img src="../../../public/img/onboarding-2.png" alt="onboarding" />
       </v-col>
       <v-col cols="10" align="center" class="mx-auto">
-        <h3 class="mt-3">You will easily see where there are some who would like to get rid of their mortgage.</h3>
+        <h3 class="mt-3">Find people in your area that need help or create a post yourself.</h3>
       </v-col>
       <v-col cols="10" align="center" class="mx-auto"> 
         <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>

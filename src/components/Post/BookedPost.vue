@@ -30,7 +30,7 @@
             <v-list-item-content>
               <v-list-item-title
                 >{{ post.author.firstName }}
-                {{ post.author.lastName }}</v-list-item-title
+                {{ post.author.lastName.substring(0, 1) + "." }}</v-list-item-title
               >
               <v-rating
                 v-model="rating"
@@ -127,8 +127,8 @@ export default {
   data() {
     return {
       rating: 4.3,
-      moment: moment,
       api_url: process.env.VUE_APP_ENDPOINT,
+      moment: moment,
     };
   },
   props: {

@@ -1,14 +1,20 @@
 <template>
   <div class="container">
     <TheLoader v-if="loading" />
-    <section v-else>
+    <section v-else class="pb-15">
       <img src="../../public/img/logo.png" alt="e-pant" width="30%" />
       <v-row class="background-image">
         <v-col cols="12" class="mt-6">
           <h1>Home</h1>
         </v-col>
         <v-col cols="12" class="pt-0">
-          <Post class="mb-4" v-for="post in allPosts" :key="post.id" v-bind:post="post" :showDetails="false"/>
+          <Post
+            class="mb-4"
+            v-for="post in allPosts"
+            :key="post.id"
+            v-bind:post="post"
+            :showDetails="false"
+          />
         </v-col>
       </v-row>
     </section>

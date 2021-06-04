@@ -6,8 +6,8 @@
         <img src="../../../public/img/onboarding-1.png" alt="onboarding" />
       </v-col>
       <v-col cols="10" align="center" class="mx-auto">
-        <h3 class="mt-3">Help others get their mortgage picked up.</h3>
-        <h3 class="mt-3">Help others give them your mortgage.</h3>
+        <h3 class="mt-3">Recycle plastic waste and help others do the same.</h3>
+        <h3 class="mt-3">Receive Graitor points and help the environment!</h3>
       </v-col>
       <v-col cols="10" align="center" class="mx-auto">
         <v-icon class="primary--text">mdi-checkbox-blank-circle</v-icon>

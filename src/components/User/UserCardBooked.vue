@@ -55,9 +55,12 @@
               </v-list-item-icon>
             </v-list-item>
           </router-link>
-          <v-divider v-if="currentUser.id != user.id"></v-divider>
-          <router-link :to="{ name: 'Message User', params: { id: user.id } }">
-            <v-list-item v-if="currentUser.id != user.id">
+          <v-divider v-if="message"></v-divider>
+          <router-link
+            :to="{ name: 'Message User', params: { id: user.id } }"
+            v-if="message"
+          >
+            <v-list-item>
               <v-list-item-content align="center">
                 <v-list-item-title
                   class="primary--text text-uppercase font-weight-bold"
@@ -75,16 +78,27 @@
 
 <script>
 export default {
-  props: ["user"],
+  props: {
+    userId: {
+      required: true,
+    },
+    message: {
+      type: Boolean,
+      default: true,
+    },
+  },
   data() {
     return {
       rating: 2.7,
       api_url: process.env.VUE_APP_ENDPOINT,
     };
   },
+  async mounted() {
+    await this.$store.dispatch("fetchUser", this.userId);
+  },
   computed: {
-    currentUser() {
-      return this.$store.state.CurrentUser.currentUser;
+    user() {
+      return this.$store.state.User.user;
     },
   },
 };

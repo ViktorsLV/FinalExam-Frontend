@@ -6,15 +6,17 @@
         <img src="../../../public/img/onboarding-4.png" alt="onboarding" />
       </v-col>
       <v-col cols="10" align="center" class="mx-auto">
-        <h3 class="mt-3">When you pledge, you get both money and Points!</h3>
-        
+        <h3 class="mt-3">
+          Deposit waste, scan the receipt and you get both - money and Graitor
+          Points!
+        </h3>
       </v-col>
-      <v-col cols="10" align="center" class="mx-auto"> 
+      <v-col cols="10" align="center" class="mx-auto">
         <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
         <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
         <v-icon class="primary--text">mdi-checkbox-blank-circle-outline</v-icon>
-      <v-icon class="primary--text">mdi-checkbox-blank-circle</v-icon>
-       </v-col>
+        <v-icon class="primary--text">mdi-checkbox-blank-circle</v-icon>
+      </v-col>
       <v-col cols="10" align="center" class="mx-auto">
         <router-link to="/home">
           <v-btn outlined rounded color="primary" width="100%">FINISH</v-btn>

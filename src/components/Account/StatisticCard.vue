@@ -34,19 +34,23 @@
           <v-divider></v-divider>
 
           <!-- <v-list-item @click="$router.push({path: '/account/invite-friends'})"> -->
+          <router-link
+          :to="{ name: 'User Reviews', params: { id: user.id } }"
+        >
           <v-list-item >
             <v-list-item-content>
               <v-list-item-title>
                 <v-icon class="secondary--text"
                   >mdi-star</v-icon
                 >
-                Ratings</v-list-item-title
+                Reviews</v-list-item-title
               >
             </v-list-item-content>
             <v-list-item-icon>
               <v-icon class="secondary--text">mdi-greater-than</v-icon>
             </v-list-item-icon>
           </v-list-item>
+          </router-link>
         </v-list-item-group>
       </v-list>
     </v-card>
