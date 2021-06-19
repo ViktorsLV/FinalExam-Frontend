@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-bottom-sheet v-model="cameraSheet" inset fullscreen>
       <v-sheet class="text-left" height="100vh">
-        <v-img src="../../../public/img/camera.png" alt="Camera" height="90vh">
+        <v-img src="../../../public/img/camera.png" alt="Camera" height="100vh">
           <div align="right">
             <v-btn
               class="mt-3"
@@ -13,15 +13,18 @@
               close
             </v-btn>
           </div>
+          <router-link :to="{ name: 'Receipt', params: { id: post.id } }">
+              <v-icon size="90" class="primary--text camera" @click="completeDelivery()">mdi-camera</v-icon>
+            </router-link>
         </v-img>
-        <v-sheet class="primary" height="20vh">
+        <!-- <v-sheet class="primary" height="30vh">
           <div class="pt-5" align="center">
             <router-link :to="{ name: 'Receipt', params: { id: post.id } }">
               <v-icon x-large class="white--text" @click="completeDelivery()">mdi-camera</v-icon>
             </router-link>
           </div>
-        </v-sheet>
-      </v-sheet>
+        </v-sheet> -->
+      </v-sheet> 
     </v-bottom-sheet>
   </div>
 </template>
@@ -62,6 +65,7 @@ export default {
           postId: this.postId,
           status: 'finished',
         });
+        // this.$router.push({ name: 'Receipt', params: { id: this.post.id } })
         // this.$router.push('/tasks/my-deliveries')
       } catch (error) {
         console.log(error)
@@ -78,5 +82,14 @@ export default {
 
 .center-text {
   margin-left: 35%;
+}
+
+.camera {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  background-color: rgba(255, 255, 255, 0.652);
+  border-radius: 50%;
+  padding: 5%;
 }
 </style>

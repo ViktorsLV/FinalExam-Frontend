@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container pb-15">
     <TheLoader v-if="loading" />
-    <section v-else>
+    <section v-else class="pb-15">
       <img src="../../public/img/logo.png" alt="e-pant" width="30%" />
       <v-row class="background-image">
         <v-col cols="12" class="mt-6 d-flex">
@@ -22,14 +22,14 @@
             <TheButton  :text="'edit post'"/>
           </router-link>
         </v-col>
-        <v-col cols="12" class="mt-2" v-if="singlePost.status !== 'booked'">
+        <v-col cols="12" class="mt-2 mb-10" v-if="singlePost.status !== 'booked'" >
           <h1>User</h1>
           <UserCardSmall :user="user" />
           <router-link :to="{ name: 'Booking', params: { id: singlePost.id } }" >
             <TheButton v-if="currentUser.id != user.id" :text="'start booking'" class="mt-8"/>
           </router-link>
         </v-col>
-        <v-col cols="12" class="mt-2" v-else>
+        <v-col cols="12" class="mt-2 mb-10" v-else>
           <h1>Booked By:</h1>
           <UserCardBooked :userId="singlePost.booking.author" />
         </v-col>

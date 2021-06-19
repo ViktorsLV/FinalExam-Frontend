@@ -13,7 +13,7 @@ const actions = {
         })
         try {
             commit('setCurrentUserFromFetch', response.data)
-            console.log(response.data)
+            // console.log(response.data)
         } catch (error) {
             console.log('Error:', error);
         }

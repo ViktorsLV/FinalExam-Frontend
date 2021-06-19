@@ -61,7 +61,8 @@
         <v-list-item>
           <v-list-item-content class="ml-2">
             <v-list-item-subtitle
-              ><v-icon class="secondary--text">mdi-google-maps</v-icon>
+              >
+              <v-icon class="secondary--text">mdi-google-maps</v-icon>
               {{ post.city }}, {{ post.street }} {{ post.houseNumber }},
               {{ post.zip }}</v-list-item-subtitle
             >
@@ -82,19 +83,13 @@
           <v-list-item class="grow">
             <v-list-item-content>
               <v-list-item-title>
-                <div v-if="post.bagNumber > 4">
-                  <v-icon large class="secondary--text">mdi-trash-can</v-icon
-                  >x{{ post.bagNumber }}
+                <div v-if="post.bagNumber > 4" class="d-flex">
+                  <img src="../../../public/img/bag.png" width="30px" alt="e-pant"/><span class="pt-3 pl-2">x{{ post.bagNumber }}</span> 
                 </div>
-                <v-icon
-                  v-else
-                  large
-                  class="secondary--text"
-                  v-for="(n, index) in post.bagNumber"
-                  :key="n.id"
-                  :index="index"
-                  >mdi-trash-can</v-icon
-                >
+                <div v-else class="d-flex">
+                <img  src="../../../public/img/bag.png" v-for="(n, index) in post.bagNumber"
+                  :key="n.id" :index="index" alt="e-pant" width="30px" class="mr-2"/>
+                </div>
               </v-list-item-title>
             </v-list-item-content>
 

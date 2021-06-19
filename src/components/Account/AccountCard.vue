@@ -35,6 +35,7 @@
                 dense
                 half-increments
                 hover
+                readonly
                 size="12"
               ></v-rating>
             </v-list-item-content>

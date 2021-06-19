@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <TheLoader v-if="loading" />
-    <v-row v-else class="background-image margin">
+    <v-row v-else class="background-image ">
       <v-col cols="12" align="center" class="margin">
         <img src="../../public/img/logo.png" alt="e-pant" width="60%"/>
         <p class="secondary--text font-italic">Better together</p>

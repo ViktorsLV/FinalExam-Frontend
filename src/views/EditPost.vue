@@ -204,6 +204,7 @@
             width="100%"
             color="delete"
             rounded
+            outlined
             large
             >DELETE POST</v-btn
           >

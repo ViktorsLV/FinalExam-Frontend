@@ -21,14 +21,12 @@ const actions = {
         })
         try {
             commit('setPosts', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
-    },
-    async getSinglePost({
-        commit
-    }, id) {
+    }, 
+    async getSinglePost({ commit }, id) {
         const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/posts/${id}`, {
             headers: {
                 'Accept': "application/json",
@@ -38,7 +36,7 @@ const actions = {
         })
         try {
             commit('setSinglePost', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -55,7 +53,7 @@ const actions = {
         })
         try {
             commit('setUsersPosts', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -72,7 +70,7 @@ const actions = {
         })
         try {
             commit('setBookedPosts', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -113,7 +111,7 @@ const actions = {
         })
         try {
             commit('addPost', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -128,7 +126,7 @@ const actions = {
         })
         try {
             commit('addBookedPost', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -143,7 +141,7 @@ const actions = {
         })
         try {
             commit('updatePost', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -185,7 +183,7 @@ const actions = {
         })
         try {
             commit('updatePost', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -200,7 +198,7 @@ const actions = {
         })
         try {
             commit('updatePost', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }
@@ -215,7 +213,7 @@ const actions = {
         })
         try {
             commit('updateBooking', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }

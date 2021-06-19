@@ -19,6 +19,9 @@
               <v-stepper-items>
                 <!-- #1 screen -->
                 <v-stepper-content step="1">
+                  <div align="center">
+                  <img src="../../../public/img/id_verify.png" alt="svg" width="30%" class="mb-2"/>
+                  </div>
                   <h3 class="mb-2 text-center">We need to verify your ID</h3>
                   <p class="text-center">
                     For better user experience and satisfaction we kindly ask

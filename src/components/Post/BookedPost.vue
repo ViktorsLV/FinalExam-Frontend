@@ -76,20 +76,13 @@
         <v-list-item class="grow">
           <v-list-item-content>
             <v-list-item-title>
-              <div v-if="post.bagNumber > 4">
-                <v-icon large class="secondary--text">mdi-trash-can</v-icon>x{{
-                  post.bagNumber
-                }}
-              </div>
-              <v-icon
-                v-else
-                large
-                class="secondary--text"
-                v-for="(n, index) in post.bagNumber"
-                :key="n.id"
-                :index="index"
-                >mdi-trash-can</v-icon
-              >
+              <div v-if="post.bagNumber > 4" class="d-flex">
+                  <img src="../../../public/img/bag.png" width="15%" alt="e-pant"/><span class="pt-2 pl-2">x{{ post.bagNumber }}</span> 
+                </div>
+                <div v-else class="d-flex">
+                <img  src="../../../public/img/bag.png" v-for="(n, index) in post.bagNumber"
+                  :key="n.id" :index="index" alt="e-pant" width="15%" class="mr-2"/>
+                </div>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

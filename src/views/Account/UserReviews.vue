@@ -14,8 +14,8 @@
         <v-col cols="12" class="pt-0">
           <ReviewList v-if="reviews.length" :reviews="reviews"/>
           <div v-else align="center" class="mt-10">
-            <img src="../../../public/img/step-2.png" alt="svg" width="70%" />
-            <h1>Sorry, there are no reviews yet!</h1>
+            <img src="../../../public/img/no-reviews.png" alt="svg" width="50%" />
+            <h3 class="mt-4 secondary--text">Sorry, there are no reviews yet!</h3>
           </div>
         </v-col>
       </v-row>

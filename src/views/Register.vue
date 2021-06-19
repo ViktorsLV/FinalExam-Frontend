@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container pb-15">
     <TheLoader v-if="loading" />
-    <section v-else>
+    <section v-else class="pb-15">
       <v-row class="background-image">
         <v-col>
           <img src="../../public/img/logo.png" alt="e-pant" width="60%" />
@@ -43,7 +43,6 @@
                 <v-text-field
                   v-model.trim="email"
                   :error-messages="emailErrors"
-
                   @blur="$v.email.$touch()"
                   label="E-mail"
                   required
@@ -71,8 +70,6 @@
                 <v-text-field
                   v-model.trim="repeatPassword"
                   :error-messages="repeatPasswordErrors"
- 
-                  @blur="$v.repeatPassword.$touch()"
                   :type="showRepeatPassword ? 'text' : 'password'"
                   :append-icon="
                     showRepeatPassword
@@ -137,7 +134,7 @@ export default {
       minLength: minLength(6),
     },
     repeatPassword: {
-      sameAsPassword: sameAs("password"),
+      sameAs: sameAs("password"),
     },
   },
   components: {

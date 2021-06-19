@@ -50,6 +50,7 @@
                 half-increments
                 hover
                 size="12"
+                readonly
               ></v-rating>
               <v-list-item-subtitle
                 >Member since

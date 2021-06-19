@@ -15,7 +15,7 @@
         <v-stepper-items>
           <!-- #1 screen -->
           <v-stepper-content step="1">
-            <h5 align="left" class="mb-4">Bags information</h5>
+            <h4 align="left" class="mb-4">Bags information</h4>
             <v-row height="65vh">
               <v-col cols="12" class="pb-0">
                 <v-autocomplete
@@ -28,27 +28,30 @@
                   required
                 ></v-autocomplete>
               </v-col>
-              <v-col cols="6" class="pt-0">
+              <v-col cols="5" class="pt-0 pb-0">
                 <v-text-field
                   v-model.trim="bagNumber"
                   dense
                   type="number"
                   rounded
-                  label="Number of bags"
+                  label="No. of bags"
                   required
                   outlined
                 ></v-text-field>
               </v-col>
-              <v-col cols="6" class="pt-0">
+              <v-col cols="7" class="pt-0 pb-0">
                 <v-text-field
                   v-model.trim="weight"
                   dense
                   type="number"
                   rounded
-                  label="Aprrox. weight (g)"
+                  label="*Aprrox. weight (g)"
                   required
                   outlined
                 ></v-text-field>
+              </v-col>
+              <v-col cols="12" class="pt-0" align="left">
+                <h5 class="headlineLight--text">* 1 plastic Dansk Retur System bag contradicts to ~250g </h5>
               </v-col>
 
               <v-col justify="bottom">
@@ -77,7 +80,7 @@
 
           <!-- #2 screen -->
           <v-stepper-content step="2">
-            <h5 align="left" class="mb-4">Location</h5>
+            <h4 align="left" class="mb-4">Location</h4>
             <v-row height="65vh">
               <v-col cols="12" class="pb-0">
                 <v-text-field
@@ -137,6 +140,7 @@
                   class="mr-3"
                     color="primary"
                     rounded
+                    outlined
                     @click="(e1 = 1), (progress = 33)"
                   >
                     Back
@@ -161,7 +165,7 @@
 
           <!-- #3 screen -->
           <v-stepper-content step="3">
-            <h5 align="left" class="mb-4">Preferences</h5>
+            <h4 align="left" class="mb-4">Preferences</h4>
             <v-row height="65vh">
               <v-col cols="12" class="pt-0">
                 <v-dialog
@@ -268,6 +272,7 @@
                   class="mr-3"
                     color="primary"
                     rounded
+                    outlined
                     @click="(e1 = 2), (progress = 66)"
                   >
                     Back
@@ -287,7 +292,7 @@
 
           <!-- #4 screen -->
           <v-stepper-content step="4">
-            <h5>Overview</h5>
+            <h4>Overview</h4>
             <v-list-item align="left">
               <v-list-item-content class="ml-2">
                 <v-list-item-subtitle
@@ -312,8 +317,10 @@
               <v-list-item class="grow" align="left">
                 <v-list-item-content>
                   <v-list-item-title>
-                    <v-icon large class="secondary--text">mdi-trash-can</v-icon
-                    >x{{ bagNumber }}
+                     <div class="d-flex">
+                  <img src="../../../public/img/bag.png" width="30px" alt="e-pant"/><span class="pt-3 pl-2">x{{ bagNumber }}</span> 
+                </div>
+                
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -392,6 +399,10 @@ export default {
           comments: this.comments,
         });
         this.$router.push("/tasks");
+          this.$store.dispatch("setSnackbar", {
+      color: "secondary",
+      text: `Posted!`,
+    });
       } catch (error) {
         console.log(error);
       }

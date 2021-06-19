@@ -78,7 +78,7 @@ export default {
   props: ["user"],
   data() {
     return {
-      rating: 2.7,
+      rating: 4.5,
       api_url: process.env.VUE_APP_ENDPOINT,
     };
   },

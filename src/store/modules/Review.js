@@ -8,7 +8,7 @@ const actions = {
     async getUsersReviews({
         commit
     }, userId) {
-        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/reviews?post.booking.author=${userId}`, {
+        const response = await axios.get(`${process.env.VUE_APP_ENDPOINT}/reviews?post.booking.author=${userId}&_sort=published_at:DESC`, {
             headers: {
                 'Accept': "application/json",
                 "Content-Type": "application/json",
@@ -17,7 +17,7 @@ const actions = {
         })
         try {
             commit('setUsersReviews', response.data)
-            console.log(response.data);
+            // console.log(response.data);
         } catch (error) {
             console.log('Error:', error);
         }

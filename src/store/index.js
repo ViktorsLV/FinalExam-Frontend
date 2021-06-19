@@ -9,9 +9,18 @@ import Review from './modules/Review.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+    snackbar: {}
+  },
+  mutations: {
+    setSnackbar: (state, snackbar) => (state.snackbar = snackbar)
+  },
+  actions: {
+    setSnackbar({ commit }, snackbar) {
+      snackbar.showing = true
+      commit('setSnackbar', snackbar)
+    }
+  },
   modules: {
     CurrentUser,
     User,

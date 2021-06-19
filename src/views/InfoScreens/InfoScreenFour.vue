@@ -3,7 +3,7 @@
     <TheLoader v-if="loading" />
     <v-row v-else>
       <v-col cols="12" class="mx-auto card-margin" align="center">
-        <img src="../../../public/img/onboarding-4.png" alt="onboarding" />
+        <img src="../../../public/img/onboarding-4.png" alt="onboarding" width="70%"/>
       </v-col>
       <v-col cols="10" align="center" class="mx-auto">
         <h3 class="mt-3">
