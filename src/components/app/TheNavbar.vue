@@ -39,7 +39,7 @@ export default {
           icon: "mdi-format-list-bulleted-square",
           route: "/tasks",
         },
-        { id: 3, title: "Add", icon: "mdi-plus-circle", route: "/add-post" },
+        { id: 3, title: "Add Posts", icon: "mdi-plus-circle", route: "/add-post" },
         { id: 4, title: "Messages", icon: "mdi-message", route: "/messages" },
         { id: 5, title: "Account", icon: "mdi-account", route: "/account" },
       ],

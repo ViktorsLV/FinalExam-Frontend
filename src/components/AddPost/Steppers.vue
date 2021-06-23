@@ -51,7 +51,7 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12" class="pt-0" align="left">
-                <h5 class="headlineLight--text">* 1 plastic Dansk Retur System bag contradicts to ~250g </h5>
+                <h5 class="headlineLight--text">* 1 plastic Dansk Retur System bag is ~250g </h5>
               </v-col>
 
               <v-col justify="bottom">

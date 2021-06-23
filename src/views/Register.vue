@@ -169,7 +169,7 @@ export default {
         };
         try {
           await this.$store.dispatch("register", newUser);
-          this.$router.push("/home");
+          this.$router.push("/step-one");
           this.progress = false;
           this.email = this.username = this.password = "";
         } catch (error) {

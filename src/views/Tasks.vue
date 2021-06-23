@@ -5,7 +5,7 @@
       <img src="../../public/img/logo.png" alt="e-pant" width="30%" />
       <v-row class="">
         <v-col cols="12" class="mt-6">
-          <h1>Home</h1>
+          <h1>Tasks</h1>
           <v-tabs
             v-model="activeTab"
               background-color="transparent"

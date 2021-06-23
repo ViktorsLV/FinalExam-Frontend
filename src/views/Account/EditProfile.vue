@@ -231,7 +231,7 @@ export default {
   },
   mounted() {
     this.id = this.$store.state.User.user.id;
-    this.profile_image = this.$store.state.User.user.profile_image.url;
+    // this.profile_image = this.$store.state.User.user.profile_image.url;
     this.firstName = this.$store.state.User.user.firstName;
     this.lastName = this.$store.state.User.user.lastName;
     this.about = this.$store.state.User.user.about;
